@@ -7,6 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{80249F15
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.IdentityServer", "src\OnlineShop.IdentityServer\OnlineShop.IdentityServer.csproj", "{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{24D01C25-2F28-4C5E-B6BF-44651FC0B3DD}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\identity_server_clean_up.sql = scripts\identity_server_clean_up.sql
+		scripts\roles_claims_constraints_fix.sql = scripts\roles_claims_constraints_fix.sql
+		scripts\users_clean_up.sql = scripts\users_clean_up.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
