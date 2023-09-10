@@ -6,12 +6,12 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using IdentityModel;
-using OnlineShop.IdentityServer.Data;
-using OnlineShop.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using OnlineShop.Library.UserManagementService.Models;
+using OnlineShop.Library.Data;
 
 namespace OnlineShop.IdentityServer
 {

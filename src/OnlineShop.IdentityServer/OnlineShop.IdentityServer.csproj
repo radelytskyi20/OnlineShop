@@ -28,4 +28,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineShop.Library\OnlineShop.Library.csproj" />
+  </ItemGroup>
 </Project>

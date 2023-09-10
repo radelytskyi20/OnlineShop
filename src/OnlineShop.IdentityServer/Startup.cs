@@ -3,8 +3,6 @@
 
 
 using IdentityServer4;
-using OnlineShop.IdentityServer.Data;
-using OnlineShop.IdentityServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +14,8 @@ using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using System.Linq;
 using System.Reflection;
+using OnlineShop.Library.UserManagementService.Models;
+using OnlineShop.Library.Data;
 
 namespace OnlineShop.IdentityServer
 {
