@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
 using OnlineShop.Library.UserManagementService.Models;
 
@@ -9,8 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(Configuration.GetConnectionString(ConnectionNames.UserConnection)));
-
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString(ConnectionNames.UserConnection));
+});
+    
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();

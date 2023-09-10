@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using OnlineShop.Library.UserManagementService.Models;
 using OnlineShop.Library.Data;
+using OnlineShop.Library.Constants;
 
 namespace OnlineShop.IdentityServer
 {
@@ -33,12 +34,12 @@ namespace OnlineShop.IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            var identityConnectionString = Configuration.GetConnectionString("IdentityServerConnection");
+            var identityConnectionString = Configuration.GetConnectionString(ConnectionNames.IdentityServerConnection);
 
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("UsersConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString(ConnectionNames.UserConnection)));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
