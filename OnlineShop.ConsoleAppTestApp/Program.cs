@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OnlineShop.Library.Options;
 
 namespace OnlineShop.ConsoleAppTestApp
 {
@@ -18,6 +19,11 @@ namespace OnlineShop.ConsoleAppTestApp
 
                     IConfiguration configuration = configurationBuilder.Build();
 
+                    services.Configure<IdentityServerApiOptions>(configuration
+                        .GetSection(IdentityServerApiOptions.SectionName));
+                    
+                    services.Configure<ServiceAdressOptions>(configuration
+                        .GetSection(ServiceAdressOptions.SectionName));
                 })
                 .ConfigureLogging(logging =>
                 {
