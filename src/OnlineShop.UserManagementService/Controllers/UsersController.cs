@@ -29,7 +29,7 @@ namespace OnlineShop.UserManagementService.Controllers
         [HttpPost(RepoActions.Update)]
         public async Task<IdentityResult> Update(ApplicationUser user)
         {
-            var userToBeUpdated = await _userManager.FindByIdAsync(user.Id);
+            var userToBeUpdated = await _userManager.FindByNameAsync(user.UserName);
             if (userToBeUpdated == null)
                 return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
 
