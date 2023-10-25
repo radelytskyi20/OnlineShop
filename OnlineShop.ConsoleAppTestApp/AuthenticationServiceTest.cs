@@ -106,7 +106,43 @@ namespace OnlineShop.ConsoleAppTestApp
 
         public async Task<string> RunRolesClientTests(string[] args)
         {
-            return await Task.FromResult("OK");
+            var token = await _identityServerClient.GetApiToken(_identityServerOptions);
+            _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
+
+            var roleName = "testRole";
+
+            var addResult = await _rolesClient.Add(new Microsoft.AspNetCore.Identity.IdentityRole(roleName));
+            Console.WriteLine($"ADD: {addResult.Succeeded}");
+
+            Thread.Sleep(100);
+
+            var getOneRequest = await _rolesClient.Get(roleName);
+            Console.WriteLine($"GET ONE: {getOneRequest.Code}");
+
+            Thread.Sleep(100);
+
+            var roleToUpdate = getOneRequest.Payload;
+            roleName = "newTestRole";
+            roleToUpdate.Name = roleName;
+            var updateResult = await _rolesClient.Update(roleToUpdate);
+            Console.WriteLine($"UPDATE: {updateResult.Succeeded}");
+
+            Thread.Sleep(100);
+
+            getOneRequest = await _rolesClient.Get(roleName);
+            Console.WriteLine($"GET ONE: {getOneRequest.Code}");
+
+            Thread.Sleep(100);
+
+            var deleteResult = await _rolesClient.Remove(getOneRequest.Payload);
+            Console.WriteLine($"DELETE: {deleteResult.Succeeded}");
+
+            Thread.Sleep(100);
+
+            var getAllRequest = await _rolesClient.GetAll();
+            Console.WriteLine($"GET ALL: {getAllRequest.Code}");
+
+            return "OK";
         }
     }
 }
