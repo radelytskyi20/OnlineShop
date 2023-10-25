@@ -2,7 +2,8 @@
 
 namespace OnlineShop.Library.Options
 {
-    public class IdentityServerApiOptions
+    //класс для хранения опций для identity server
+    public class IdentityServerApiOptions //убрать уже заданные значения 
     {
         public const string SectionName = nameof(IdentityServerApiOptions);
         public string ClientId { get; set; } = "test.client";
