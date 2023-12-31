@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OnlineShop.Library.Clients.IdentityServer;
+using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Options;
 
 namespace OnlineShop.ConsoleAppTestApp
@@ -13,6 +15,11 @@ namespace OnlineShop.ConsoleAppTestApp
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddTransient<AuthenticationServiceTest>();
+                    services.AddHttpClient<IdentityServerClient>();
+                    services.AddHttpClient<UsersClient>();
+                    services.AddHttpClient<RolesClient>();
+
                     var configurationBuilder = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile("appsettings.json", optional: false);
@@ -40,7 +47,12 @@ namespace OnlineShop.ConsoleAppTestApp
 
                 try
                 {
+                    var service = services.GetRequiredService<AuthenticationServiceTest>();
+                    var rolesResult = await service.RunRolesClientTests(args);
+                    var usersResult = await service.RunUsersClientTests(args);
 
+                    Console.WriteLine(rolesResult);
+                    Console.WriteLine(usersResult);
                 }
                 catch (Exception ex)
                 {

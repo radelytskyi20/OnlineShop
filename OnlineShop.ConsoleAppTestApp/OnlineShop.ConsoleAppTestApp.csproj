@@ -17,4 +17,10 @@
     <ProjectReference Include="..\src\OnlineShop.Library\OnlineShop.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
