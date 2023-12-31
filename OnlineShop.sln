@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{80249F15-50A7-4783-88DD-45D76A3BDD07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.IdentityServer", "src\OnlineShop.IdentityServer\OnlineShop.IdentityServer.csproj", "{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{24D01C25-2F28-4C5E-B6BF-44651FC0B3DD}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\identity_server_clean_up.sql = scripts\identity_server_clean_up.sql
+		scripts\roles_claims_constraints_fix.sql = scripts\roles_claims_constraints_fix.sql
+		scripts\users_clean_up.sql = scripts\users_clean_up.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.UserManagementService", "src\OnlineShop.UserManagementService\OnlineShop.UserManagementService.csproj", "{B6881149-C450-45BE-B08B-B0E07D02D512}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{BE757511-CC0C-49BC-8AB8-3935F05B1843}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Library", "src\OnlineShop.Library\OnlineShop.Library.csproj", "{49881D46-1683-483B-9917-6443F22BD8BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.ConsoleAppTestApp", "OnlineShop.ConsoleAppTestApp\OnlineShop.ConsoleAppTestApp.csproj", "{26CD63A7-7E29-4342-872E-EADA98374F42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6881149-C450-45BE-B08B-B0E07D02D512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6881149-C450-45BE-B08B-B0E07D02D512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6881149-C450-45BE-B08B-B0E07D02D512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6881149-C450-45BE-B08B-B0E07D02D512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49881D46-1683-483B-9917-6443F22BD8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49881D46-1683-483B-9917-6443F22BD8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49881D46-1683-483B-9917-6443F22BD8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49881D46-1683-483B-9917-6443F22BD8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CD63A7-7E29-4342-872E-EADA98374F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CD63A7-7E29-4342-872E-EADA98374F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CD63A7-7E29-4342-872E-EADA98374F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CD63A7-7E29-4342-872E-EADA98374F42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D} = {80249F15-50A7-4783-88DD-45D76A3BDD07}
+		{B6881149-C450-45BE-B08B-B0E07D02D512} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
+		{49881D46-1683-483B-9917-6443F22BD8BA} = {BE757511-CC0C-49BC-8AB8-3935F05B1843}
+		{26CD63A7-7E29-4342-872E-EADA98374F42} = {80249F15-50A7-4783-88DD-45D76A3BDD07}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}
+	EndGlobalSection
+EndGlobal
