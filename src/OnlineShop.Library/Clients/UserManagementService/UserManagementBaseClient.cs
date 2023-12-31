@@ -7,6 +7,9 @@ using System.Text;
 
 namespace OnlineShop.Library.Clients.UserManagementService
 {
+    /// <summary>
+    /// Represents a client for interacting with UserManagementService(Roles and Users controllers)
+    /// </summary>
     public class UserManagementBaseClient : IDisposable
     {
         public UserManagementBaseClient(HttpClient client, IOptions<ServiceAdressOptions> options)
@@ -17,21 +20,24 @@ namespace OnlineShop.Library.Clients.UserManagementService
 
         public HttpClient HttpClient { get; set; }
 
+        /// <summary>
+        /// Sends a POST request to the UserManagementService and handles the response
+        /// </summary>
         protected async Task<IdentityResult> SendPostRequest<TRequest>(TRequest request, string path)
         {
-            var jsonContent = JsonConvert.SerializeObject(request);
+            var jsonContent = JsonConvert.SerializeObject(request); //serialize request to json
             var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var requestResult = await HttpClient.PostAsync(path, httpContent);
+            var requestResult = await HttpClient.PostAsync(path, httpContent); //send http post request to user management service(base address + request address)
 
             IdentityResult result;
 
-            if (requestResult.IsSuccessStatusCode)
+            if (requestResult.IsSuccessStatusCode) //if result is success => deserialize response from user management service to IdentityResultDto and handle it
             {
                 var responseJson = await requestResult.Content.ReadAsStringAsync();
                 var response = JsonConvert.DeserializeObject<IdentityResultDto>(responseJson);
                 result = HandleResponse(response);
             }
-            else
+            else //if result is not success => create IdentityResult with error code and description from user management service
             {
                 result = IdentityResult.Failed(
                     new IdentityError()
@@ -52,7 +58,7 @@ namespace OnlineShop.Library.Clients.UserManagementService
             if (requestResult.IsSuccessStatusCode)
             {
                 var response = await requestResult.Content.ReadAsStringAsync();
-                if (string.IsNullOrEmpty(response))
+                if (string.IsNullOrEmpty(response)) //if response is empty => create UserManagementServiceResponse with error code and description from user management service
                 {
                     result = new UserManagementServiceResponse<TResult>()
                     {
@@ -60,7 +66,7 @@ namespace OnlineShop.Library.Clients.UserManagementService
                         Description = requestResult.ReasonPhrase
                     };
                 }
-                else
+                else //if response is success => deserialize response from user management service to UserManagementServiceResponse and return it
                 {
                     var payload = JsonConvert.DeserializeObject<TResult>(response);
                     result = new UserManagementServiceResponse<TResult>()
@@ -71,7 +77,7 @@ namespace OnlineShop.Library.Clients.UserManagementService
                     };
                 }
             }
-            else
+            else //if result is not success => create UserManagementServiceResponse with error code and description from user management service
             {
                 result = new UserManagementServiceResponse<TResult>()
                 {
@@ -88,11 +94,15 @@ namespace OnlineShop.Library.Clients.UserManagementService
             HttpClient.Dispose();
         }
 
+        /// <summary>
+        /// Handles the response from the UserManagementService
+        /// </summary>
+        /// <param name="response">The response from the UserManagementService</param>
+        /// <returns>The IdentityResult based on the response</returns>
         private IdentityResult HandleResponse(IdentityResultDto response)
         {
             if (response.Succeeded)
                 return IdentityResult.Success;
-
             else
                 return IdentityResult.Failed(response.Errors.ToArray());
         }

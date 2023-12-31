@@ -70,7 +70,7 @@ namespace OnlineShop.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
 
             var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
             return result;
@@ -81,7 +81,7 @@ namespace OnlineShop.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
 
             var result = await _userManager.AddToRoleAsync(user, request.RoleName);
             return result;
@@ -92,7 +92,7 @@ namespace OnlineShop.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
 
             var result = await _userManager.AddToRolesAsync(user, request.RoleNames);
             return result;
@@ -103,7 +103,7 @@ namespace OnlineShop.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
 
             var result = await _userManager.RemoveFromRoleAsync(user, request.RoleName);
             return result;
@@ -114,7 +114,7 @@ namespace OnlineShop.UserManagementService.Controllers
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
+                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
 
             var result = await _userManager.RemoveFromRolesAsync(user, request.RoleNames);
             return result;
