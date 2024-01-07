@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Library.Data;
 
@@ -11,9 +12,10 @@ using OnlineShop.Library.Data;
 namespace OnlineShop.Library.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240107130829_CreateIdentitySchema")]
+    partial class CreateIdentitySchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,36 +157,6 @@ namespace OnlineShop.Library.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("OnlineShop.Library.Common.Models.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AddressLine1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(32)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Addresses");
-                });
-
             modelBuilder.Entity("OnlineShop.Library.UserManagementService.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -197,24 +169,12 @@ namespace OnlineShop.Library.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DefaultAddressId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DeliveryAddressId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -250,10 +210,6 @@ namespace OnlineShop.Library.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DefaultAddressId");
-
-                    b.HasIndex("DeliveryAddressId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -315,21 +271,6 @@ namespace OnlineShop.Library.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OnlineShop.Library.UserManagementService.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("OnlineShop.Library.Common.Models.Address", "DefaultAddress")
-                        .WithMany()
-                        .HasForeignKey("DefaultAddressId");
-
-                    b.HasOne("OnlineShop.Library.Common.Models.Address", "DeliveryAddress")
-                        .WithMany()
-                        .HasForeignKey("DeliveryAddressId");
-
-                    b.Navigation("DefaultAddress");
-
-                    b.Navigation("DeliveryAddress");
                 });
 #pragma warning restore 612, 618
         }

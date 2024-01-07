@@ -3,20 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace OnlineShop.Library.Data.Migrations
+namespace OnlineShop.Library.Migrations
 {
     public partial class AddAddressAndNames : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles");
-
             migrationBuilder.AddColumn<Guid>(
                 name: "DefaultAddressId",
                 table: "AspNetUsers",
@@ -67,20 +59,6 @@ namespace OnlineShop.Library.Data.Migrations
                 table: "AspNetUsers",
                 column: "DeliveryAddressId");
 
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
-
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Addresses_DefaultAddressId",
                 table: "AspNetUsers",
@@ -117,14 +95,6 @@ namespace OnlineShop.Library.Data.Migrations
                 name: "IX_AspNetUsers_DeliveryAddressId",
                 table: "AspNetUsers");
 
-            migrationBuilder.DropIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles");
-
             migrationBuilder.DropColumn(
                 name: "DefaultAddressId",
                 table: "AspNetUsers");
@@ -140,18 +110,6 @@ namespace OnlineShop.Library.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "LastName",
                 table: "AspNetUsers");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true);
         }
     }
 }

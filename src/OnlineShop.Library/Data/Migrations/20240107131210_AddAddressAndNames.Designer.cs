@@ -9,10 +9,10 @@ using OnlineShop.Library.Data;
 
 #nullable disable
 
-namespace OnlineShop.Library.Data.Migrations
+namespace OnlineShop.Library.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230910131941_AddAddressAndNames")]
+    [Migration("20240107131210_AddAddressAndNames")]
     partial class AddAddressAndNames
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
