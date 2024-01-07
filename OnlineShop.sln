@@ -7,13 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{80249F15
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.IdentityServer", "src\OnlineShop.IdentityServer\OnlineShop.IdentityServer.csproj", "{CBFDDB9A-CA7F-4CDA-BC32-787ED10B430D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{24D01C25-2F28-4C5E-B6BF-44651FC0B3DD}"
-	ProjectSection(SolutionItems) = preProject
-		scripts\identity_server_clean_up.sql = scripts\identity_server_clean_up.sql
-		scripts\roles_claims_constraints_fix.sql = scripts\roles_claims_constraints_fix.sql
-		scripts\users_clean_up.sql = scripts\users_clean_up.sql
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.UserManagementService", "src\OnlineShop.UserManagementService\OnlineShop.UserManagementService.csproj", "{B6881149-C450-45BE-B08B-B0E07D02D512}"
@@ -23,6 +16,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Library", "src\OnlineShop.Library\OnlineShop.Library.csproj", "{49881D46-1683-483B-9917-6443F22BD8BA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ConsoleAppTestApp", "src\OnlineShop.ConsoleAppTestApp\OnlineShop.ConsoleAppTestApp.csproj", "{B5DC4CF0-FC6D-47FE-853C-3858E0BD9340}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{23374A74-B464-4D25-A0A3-586D8AD51381}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{FE6B4D37-E519-4D61-9C95-65E8C31C2EFA}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\sql\identity_server_clean_up.sql = scripts\sql\identity_server_clean_up.sql
+		scripts\sql\roles_claims_constraints_fix.sql = scripts\sql\roles_claims_constraints_fix.sql
+		scripts\sql\users_clean_up.sql = scripts\sql\users_clean_up.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,7 @@ Global
 		{B6881149-C450-45BE-B08B-B0E07D02D512} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
 		{49881D46-1683-483B-9917-6443F22BD8BA} = {BE757511-CC0C-49BC-8AB8-3935F05B1843}
 		{B5DC4CF0-FC6D-47FE-853C-3858E0BD9340} = {80249F15-50A7-4783-88DD-45D76A3BDD07}
+		{FE6B4D37-E519-4D61-9C95-65E8C31C2EFA} = {23374A74-B464-4D25-A0A3-586D8AD51381}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}
