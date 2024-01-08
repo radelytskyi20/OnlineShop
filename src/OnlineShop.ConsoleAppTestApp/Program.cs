@@ -50,9 +50,11 @@ namespace OnlineShop.ConsoleAppTestApp
                     var service = services.GetRequiredService<AuthenticationServiceTest>();
                     var rolesResult = await service.RunRolesClientTests(args);
                     var usersResult = await service.RunUsersClientTests(args);
+                    var clearTestDataResult = await service.RunClearTmpDataTests(args);
 
                     Console.WriteLine(rolesResult);
                     Console.WriteLine(usersResult);
+                    Console.WriteLine(clearTestDataResult);
                 }
                 catch (Exception ex)
                 {

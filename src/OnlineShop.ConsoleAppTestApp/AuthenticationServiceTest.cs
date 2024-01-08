@@ -27,26 +27,34 @@ namespace OnlineShop.ConsoleAppTestApp
             _identityServerOptions = options.Value;
         }
 
+        private string testUserName = "rfihfh";
+        private string[] testRoleNames = new[] { "ShopClient1", "ShopClient2", "ShopClient3" }; 
+
         public async Task<string> RunUsersClientTests(string[] args)
         {
             var token = await _identityServerClient.GetApiToken(_identityServerOptions);
             _usersClient.HttpClient.SetBearerToken(token.AccessToken);
 
-            var userName = "rfihfh";
-            var roleName = "ShopClient3";
-            var roleNames = new[] { "ShopClient3", "ShopClient4" };
-
-            var addResult = await _usersClient.Add(new CreateUserRequest() { User = new Library.UserManagementService.Models.ApplicationUser() { UserName = userName }, Password = "Password_1" });
+            var addResult = await _usersClient.Add(new CreateUserRequest() 
+            { 
+                User = new Library.UserManagementService.Models.ApplicationUser() { UserName = testUserName }, 
+                Password = "Password_1" 
+            });
             Console.WriteLine($"ADD: {addResult.Succeeded}");
 
             Thread.Sleep(100);
 
-            var changePasswordRequest = await _usersClient.ChangePassword(new UserPasswordChangeRequest() { UserName = userName, CurrentPassword = "Password_1", NewPassword = "Password_2" });
+            var changePasswordRequest = await _usersClient.ChangePassword(new UserPasswordChangeRequest() 
+            { 
+                UserName = testUserName, 
+                CurrentPassword = "Password_1", 
+                NewPassword = "Password_2" 
+            });
             Console.WriteLine($"CHANGE PASSWORD: {changePasswordRequest.Succeeded}");
 
             Thread.Sleep(100);
 
-            var getOneRequest = await _usersClient.Get(userName);
+            var getOneRequest = await _usersClient.Get(testUserName);
             Console.WriteLine($"GET ONE: {getOneRequest.Code}");
 
             Thread.Sleep(100);
@@ -71,37 +79,43 @@ namespace OnlineShop.ConsoleAppTestApp
 
             Thread.Sleep(100);
 
-            var addToRoleRequest = await _usersClient.AddToRole(new AddRemoveRoleRequest() { UserName = userName, RoleName = roleName });
+            var addToRoleRequest = await _usersClient.AddToRole(new AddRemoveRoleRequest()
+            {
+                UserName = testUserName,
+                RoleName = testRoleNames[0]
+            });
             Console.WriteLine($"ADD TO ROLE: {addToRoleRequest.Succeeded}");
 
             Thread.Sleep(100);
 
-            var removeFromRoleRequest = await _usersClient.RemoveFromRole(new AddRemoveRoleRequest() { UserName = userName, RoleName = roleName });
+            var removeFromRoleRequest = await _usersClient.RemoveFromRole(new AddRemoveRoleRequest() 
+            { 
+                UserName = testUserName, 
+                RoleName = testRoleNames[0]
+            });
             Console.WriteLine($"REMOVE FROM ROLE: {removeFromRoleRequest.Succeeded}");
 
             Thread.Sleep(100);
 
-            var addToRolesRequest = await _usersClient.AddToRoles(new AddRemoveRolesRequest() { UserName = userName, RoleNames = roleNames });
+            var addToRolesRequest = await _usersClient.AddToRoles(new AddRemoveRolesRequest()
+            {
+                UserName = testUserName,
+                RoleNames = testRoleNames.Skip(1).ToArray()
+            });
             Console.WriteLine($"ADD TO ROLES: {addToRolesRequest.Succeeded}");
 
             Thread.Sleep(100);
 
-            var removeFromRolesRequest = await _usersClient.RemoveFromRoles(new AddRemoveRolesRequest() { UserName = userName, RoleNames = roleNames });
+            var removeFromRolesRequest = await _usersClient.RemoveFromRoles(new AddRemoveRolesRequest() 
+            { 
+                UserName = testUserName, 
+                RoleNames = testRoleNames.Skip(1).ToArray()
+            });
             Console.WriteLine($"REMOVE FROM ROLES: {removeFromRolesRequest.Succeeded}");
 
             Thread.Sleep(100);
 
-            getOneRequest = await _usersClient.Get(userName); //проверить!!! возвращает пользователя будто мы не обновляли его!
-            Console.WriteLine($"GET ONE: {getOneRequest.Code}");
-
-            Thread.Sleep(100);
-
-            var deleteResult = await _usersClient.Remove(getOneRequest.Payload); //некорректно удаляем пользователя!
-            Console.WriteLine($"DELETE: {deleteResult.Succeeded}");
-
-            Thread.Sleep(100);
-
-            return "OK";
+            return $"{nameof(RunUsersClientTests)}: OK";
         }
 
         public async Task<string> RunRolesClientTests(string[] args)
@@ -109,40 +123,64 @@ namespace OnlineShop.ConsoleAppTestApp
             var token = await _identityServerClient.GetApiToken(_identityServerOptions);
             _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
 
-            var roleName = "testRole";
+            foreach (var roleName in testRoleNames)
+            {
+                var addResult = await _rolesClient.Add(new Microsoft.AspNetCore.Identity.IdentityRole(roleName));
+                Console.WriteLine($"ADD: {addResult.Succeeded}");
 
-            var addResult = await _rolesClient.Add(new Microsoft.AspNetCore.Identity.IdentityRole(roleName));
-            Console.WriteLine($"ADD: {addResult.Succeeded}");
+                Thread.Sleep(100);
+            }
 
-            Thread.Sleep(100);
-
-            var getOneRequest = await _rolesClient.Get(roleName);
+            var getOneRequest = await _rolesClient.Get(testRoleNames[0]);
             Console.WriteLine($"GET ONE: {getOneRequest.Code}");
 
             Thread.Sleep(100);
 
             var roleToUpdate = getOneRequest.Payload;
-            roleName = "newTestRole";
-            roleToUpdate.Name = roleName;
+            testRoleNames[0] = "newTestRole";
+            roleToUpdate.Name = testRoleNames[0];
             var updateResult = await _rolesClient.Update(roleToUpdate);
             Console.WriteLine($"UPDATE: {updateResult.Succeeded}");
-
-            Thread.Sleep(100);
-
-            getOneRequest = await _rolesClient.Get(roleName);
-            Console.WriteLine($"GET ONE: {getOneRequest.Code}");
-
-            Thread.Sleep(100);
-
-            var deleteResult = await _rolesClient.Remove(getOneRequest.Payload);
-            Console.WriteLine($"DELETE: {deleteResult.Succeeded}");
 
             Thread.Sleep(100);
 
             var getAllRequest = await _rolesClient.GetAll();
             Console.WriteLine($"GET ALL: {getAllRequest.Code}");
 
-            return "OK";
+            Thread.Sleep(100);
+
+            return $"{nameof(RunRolesClientTests)}: OK";
+        }
+
+        public async Task<string> RunClearTmpDataTests(string[] args)
+        {
+            var token = await _identityServerClient.GetApiToken(_identityServerOptions);
+            _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
+            _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
+
+            //remove test user
+            var getTestUserRequest = await _usersClient.Get(testUserName);
+            Console.WriteLine($"GET ONE: {getTestUserRequest.Code}");
+
+            Thread.Sleep(100);
+
+            var deleteUserResult = await _usersClient.Remove(getTestUserRequest.Payload);
+            Console.WriteLine($"DELETE: {deleteUserResult.Succeeded}");
+
+            Thread.Sleep(100);
+
+            foreach (var roleName in testRoleNames)
+            {
+                var getOneRoleRequest = await _rolesClient.Get(roleName);
+                Console.WriteLine($"GET ONE: {getOneRoleRequest.Code}");
+
+                Thread.Sleep(100);
+
+                var deleteRoleResult = await _rolesClient.Remove(getOneRoleRequest.Payload);
+                Console.WriteLine($"DELETE: {deleteRoleResult.Succeeded}");
+            }
+
+            return $"{nameof(RunClearTmpDataTests)}: OK";
         }
     }
 }
