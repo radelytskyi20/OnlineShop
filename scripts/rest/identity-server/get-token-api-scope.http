@@ -1,0 +1,5 @@
+#use client credentials grant flow
+POST https://localhost:5001/connect/token
+Content-Type: application/x-www-form-urlencoded
+
+scope=OnlineShop.Api&client_secret=511536EF-F270-4058-80CA-1C89C192F69A&grant_type=client_credentials&client_id=test.client

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.UserManagementService.Models;
 using OnlineShop.Library.UserManagementService.Requests;
@@ -52,16 +53,23 @@ namespace OnlineShop.UserManagementService.Controllers
         }
 
         [HttpGet]
-        public Task<ApplicationUser> Get(string name)
+        public Task<ApplicationUser?> Get(string userName)
         {
-            var result = _userManager.FindByNameAsync(name);
+            var result = _userManager.Users
+                .Include(u => u.DefaultAddress)
+                .Include(u => u.DeliveryAddress)
+                .FirstOrDefaultAsync(u => u.UserName == userName); //improve in the future
+
             return result;
         }
 
         [HttpGet(RepoActions.GetAll)]
         public IEnumerable<ApplicationUser> Get()
         {
-            var result = _userManager.Users.AsEnumerable();
+            var result = _userManager.Users
+                .Include(u => u.DefaultAddress)
+                .Include(u => u.DeliveryAddress)
+                .AsEnumerable();
             return result;
         }
 

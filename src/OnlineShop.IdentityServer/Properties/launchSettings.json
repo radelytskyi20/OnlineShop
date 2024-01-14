@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SelfHost": {
+    "OnlineShop.IdentityServer": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
