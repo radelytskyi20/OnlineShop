@@ -59,6 +59,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users-controller", "users-c
 		scripts\rest\user-management-service\users-controller\update-user.http = scripts\rest\user-management-service\users-controller\update-user.http
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{085E03CF-D58C-461E-A041-A33DAFB4D5B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.UserManagementService.ApiTests", "src\OnlineShop.UserManagementService.ApiTests\OnlineShop.UserManagementService.ApiTests.csproj", "{20759372-C963-4EAD-9C90-DBA88DB0A5A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,10 @@ Global
 		{B5DC4CF0-FC6D-47FE-853C-3858E0BD9340}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5DC4CF0-FC6D-47FE-853C-3858E0BD9340}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5DC4CF0-FC6D-47FE-853C-3858E0BD9340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +104,7 @@ Global
 		{05911AED-1E6B-4FB5-8C31-CE5D4980D416} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
 		{06617137-7DBA-4820-A05A-829C186CD4C2} = {05911AED-1E6B-4FB5-8C31-CE5D4980D416}
 		{761357BA-B5BB-4789-84DA-FE582F08513F} = {05911AED-1E6B-4FB5-8C31-CE5D4980D416}
+		{20759372-C963-4EAD-9C90-DBA88DB0A5A2} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}

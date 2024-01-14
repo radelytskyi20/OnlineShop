@@ -8,7 +8,7 @@ namespace OnlineShop.Library.Clients.IdentityServer
     /// <summary>
     /// Represents a client for interacting with Identity Server
     /// </summary>
-    public class IdentityServerClient
+    public class IdentityServerClient : IIdentityServerClient
     {
         public IdentityServerClient(HttpClient client, IOptions<ServiceAdressOptions> options)
         {

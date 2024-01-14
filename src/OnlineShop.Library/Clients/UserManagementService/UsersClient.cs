@@ -30,8 +30,8 @@ namespace OnlineShop.Library.Clients.UserManagementService
         public async Task<IdentityResult> RemoveFromRoles(AddRemoveRolesRequest request)
             => await SendPostRequest(request, $"/{UsersControllerRoutes.ControllerName}/{UsersControllerRoutes.RemoveFromRoles}");
 
-        public async Task<UserManagementServiceResponse<ApplicationUser>> Get(string name)
-            => await SendGetRequest<ApplicationUser>($"{UsersControllerRoutes.ControllerName}?name={name}");
+        public async Task<UserManagementServiceResponse<ApplicationUser>> Get(string userName)
+            => await SendGetRequest<ApplicationUser>($"{UsersControllerRoutes.ControllerName}?userName={userName}");
 
         public async Task<UserManagementServiceResponse<IEnumerable<ApplicationUser>>> GetAll()
             => await SendGetRequest<IEnumerable<ApplicationUser>>($"/{UsersControllerRoutes.ControllerName}/{RepoActions.GetAll}");
