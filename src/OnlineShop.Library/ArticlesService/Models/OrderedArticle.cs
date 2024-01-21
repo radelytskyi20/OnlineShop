@@ -19,7 +19,7 @@ namespace OnlineShop.Library.ArticlesService.Models
         [Required]
         public string Description { get; set; }
 
-        [Column(TypeName = "numeric(12, 4"), Required]
+        [Column(TypeName = "numeric(12, 4)"), Required]
         public decimal Price { get; set; }
 
         [Column(TypeName = "int"), Required]

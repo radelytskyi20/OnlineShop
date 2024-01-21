@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace OnlineShop.Library.Migrations
+namespace OnlineShop.Library.Data.Migrations.Users
 {
     public partial class CreateIdentitySchema : Migration
     {

@@ -8,7 +8,7 @@ using OnlineShop.Library.Data;
 
 #nullable disable
 
-namespace OnlineShop.Library.Migrations
+namespace OnlineShop.Library.Data.Migrations.Users
 {
     [DbContext(typeof(UsersDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

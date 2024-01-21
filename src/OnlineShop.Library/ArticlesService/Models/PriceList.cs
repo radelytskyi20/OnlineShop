@@ -15,7 +15,7 @@ namespace OnlineShop.Library.ArticlesService.Models
         [ForeignKey("Article")]
         public Guid ArticleId { get; set; }
 
-        [Column(TypeName = "numeric(12, 4")] //12 digits, 4 of them after the decimal point
+        [Column(TypeName = "numeric(12, 4)")] //12 digits, 4 of them after the decimal point
         public decimal Price { get; set; }
 
         [Required]

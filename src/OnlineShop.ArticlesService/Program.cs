@@ -1,10 +1,7 @@
-using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
-using OnlineShop.Library.UserManagementService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +14,11 @@ builder.Services.AddSwaggerGen(options =>
         Title = "ArticlesService",
         Version = "v1"
     });
+});
+
+builder.Services.AddDbContext<OrdersDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString(ConnectionNames.OrdersConnection));
 });
 
 var app = builder.Build();
