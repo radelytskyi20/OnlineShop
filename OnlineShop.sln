@@ -21,9 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{2337
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{FE6B4D37-E519-4D61-9C95-65E8C31C2EFA}"
 	ProjectSection(SolutionItems) = preProject
-		scripts\sql\identity_server_clean_up.sql = scripts\sql\identity_server_clean_up.sql
-		scripts\sql\roles_claims_constraints_fix.sql = scripts\sql\roles_claims_constraints_fix.sql
-		scripts\sql\users_clean_up.sql = scripts\sql\users_clean_up.sql
+		scripts\sql\identity-server-clean-up.sql = scripts\sql\identity-server-clean-up.sql
+		scripts\sql\orders-clean-up.sql = scripts\sql\orders-clean-up.sql
+		scripts\sql\roles-claims-constraints-fix.sql = scripts\sql\roles-claims-constraints-fix.sql
+		scripts\sql\users-clean-up.sql = scripts\sql\users-clean-up.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rest", "rest", "{87F679EB-0241-49EA-AB8E-13DB650A6C93}"
@@ -63,7 +64,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{085E03CF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.UserManagementService.ApiTests", "src\OnlineShop.UserManagementService.ApiTests\OnlineShop.UserManagementService.ApiTests.csproj", "{20759372-C963-4EAD-9C90-DBA88DB0A5A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.ArticlesService", "src\OnlineShop.ArticlesService\OnlineShop.ArticlesService.csproj", "{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ArticlesService", "src\OnlineShop.ArticlesService\OnlineShop.ArticlesService.csproj", "{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
