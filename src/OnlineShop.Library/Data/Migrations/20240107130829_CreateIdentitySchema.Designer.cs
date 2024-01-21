@@ -11,7 +11,7 @@ using OnlineShop.Library.Data;
 
 namespace OnlineShop.Library.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(UsersDbContext))]
     [Migration("20240107130829_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

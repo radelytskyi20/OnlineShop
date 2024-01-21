@@ -10,13 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<UsersDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString(ConnectionNames.UserConnection));
 });
     
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(
