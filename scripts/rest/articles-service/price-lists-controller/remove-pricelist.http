@@ -1,0 +1,4 @@
+POST https://localhost:5006/pricelists/remove
+Content-Type: application/json
+
+"EBC9EDCA-A692-45F5-EAE6-08DC20389C17"

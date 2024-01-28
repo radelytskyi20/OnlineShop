@@ -66,6 +66,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.UserManagementSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ArticlesService", "src\OnlineShop.ArticlesService\OnlineShop.ArticlesService.csproj", "{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "articles-service", "articles-service", "{472E9733-8F68-4C7D-B804-0F3979354B94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "articles-controller", "articles-controller", "{91F94031-BDA4-41CF-BD58-2063809D99AD}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\articles-service\articles-controller\add-article.http = scripts\rest\articles-service\articles-controller\add-article.http
+		scripts\rest\articles-service\articles-controller\add-range-articles.http = scripts\rest\articles-service\articles-controller\add-range-articles.http
+		scripts\rest\articles-service\articles-controller\get-all-articles.http = scripts\rest\articles-service\articles-controller\get-all-articles.http
+		scripts\rest\articles-service\articles-controller\get-article-by-id.http = scripts\rest\articles-service\articles-controller\get-article-by-id.http
+		scripts\rest\articles-service\articles-controller\remove-article.http = scripts\rest\articles-service\articles-controller\remove-article.http
+		scripts\rest\articles-service\articles-controller\remove-range-articles.http = scripts\rest\articles-service\articles-controller\remove-range-articles.http
+		scripts\rest\articles-service\articles-controller\update-article.http = scripts\rest\articles-service\articles-controller\update-article.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "price-lists-controller", "price-lists-controller", "{5FCE4C57-1C5F-429C-A8B3-0D7D4B17FA42}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\articles-service\price-lists-controller\add-pricelist.http = scripts\rest\articles-service\price-lists-controller\add-pricelist.http
+		scripts\rest\articles-service\price-lists-controller\add-range-pricelists.http = scripts\rest\articles-service\price-lists-controller\add-range-pricelists.http
+		scripts\rest\articles-service\price-lists-controller\get-all-pricelists.http = scripts\rest\articles-service\price-lists-controller\get-all-pricelists.http
+		scripts\rest\articles-service\price-lists-controller\get-pricelist-by-id.http = scripts\rest\articles-service\price-lists-controller\get-pricelist-by-id.http
+		scripts\rest\articles-service\price-lists-controller\remove-pricelist.http = scripts\rest\articles-service\price-lists-controller\remove-pricelist.http
+		scripts\rest\articles-service\price-lists-controller\remove-range-pricelists.http = scripts\rest\articles-service\price-lists-controller\remove-range-pricelists.http
+		scripts\rest\articles-service\price-lists-controller\update-pricelist.http = scripts\rest\articles-service\price-lists-controller\update-pricelist.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +137,9 @@ Global
 		{761357BA-B5BB-4789-84DA-FE582F08513F} = {05911AED-1E6B-4FB5-8C31-CE5D4980D416}
 		{20759372-C963-4EAD-9C90-DBA88DB0A5A2} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
 		{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
+		{472E9733-8F68-4C7D-B804-0F3979354B94} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
+		{91F94031-BDA4-41CF-BD58-2063809D99AD} = {472E9733-8F68-4C7D-B804-0F3979354B94}
+		{5FCE4C57-1C5F-429C-A8B3-0D7D4B17FA42} = {472E9733-8F68-4C7D-B804-0F3979354B94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}

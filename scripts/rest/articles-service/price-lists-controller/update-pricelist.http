@@ -1,0 +1,12 @@
+POST https://localhost:5006/pricelists/update
+Content-Type: application/json
+
+{
+    "id": "8657A746-A1A4-4039-EAEB-08DC20389C17",
+    "articleId": "BA5D3BE3-6BDB-4167-DED7-08DC2032EFD5",
+    "price": 500,
+    "name": "Custom name",
+    "validFrom": "2030-01-28T00:00:00",
+    "validTo": "2035-01-28T00:00:00"
+}
+

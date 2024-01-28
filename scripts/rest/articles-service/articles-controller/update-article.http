@@ -1,0 +1,8 @@
+POST https://localhost:5006/articles/update
+Content-Type: application/json
+
+{
+    "id": "9A4D0DB4-AE3C-470E-DED6-08DC2032EFD5",
+    "name": "Lenovo Gaming laptop",
+    "description": "Lenovo Gaming laptop"
+}

@@ -1,0 +1,9 @@
+POST https://localhost:5006/pricelists/add
+Content-Type: application/json
+
+{
+    "articleId": "ba5d3be3-6bdb-4167-ded7-08dc2032efd5",
+    "price": "78.50",
+    "validFrom": "2024-01-28",
+    "validTo": "2025-01-28"
+}
