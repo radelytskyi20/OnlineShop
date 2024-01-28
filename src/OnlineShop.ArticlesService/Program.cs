@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using OnlineShop.Library.ArticlesService.Models;
+using OnlineShop.Library.ArticlesService.Repo;
+using OnlineShop.Library.Common.Interfaces;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
 
@@ -15,6 +18,9 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1"
     });
 });
+
+builder.Services.AddTransient<IRepo<Article>, ArticlesRepo>();
+builder.Services.AddTransient<IRepo<PriceList>, PriceListsRepo>();
 
 builder.Services.AddDbContext<OrdersDbContext>(options =>
 {
