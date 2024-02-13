@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using OnlineShop.Library.ArticlesService.Models;
+using OnlineShop.Library.Common.Interfaces;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
+using OnlineShop.Library.OrdersService.Models;
+using OnlineShop.Library.OrdersService.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,9 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1"
     });
 });
+
+builder.Services.AddTransient<IRepo<Order>, OrdersRepo>();
+builder.Services.AddTransient<IRepo<OrderedArticle>, OrderedArticlesRepo>();
 
 builder.Services.AddDbContext<OrdersDbContext>(options =>
 {
