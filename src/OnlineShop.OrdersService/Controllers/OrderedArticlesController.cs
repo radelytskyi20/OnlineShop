@@ -1,9 +1,12 @@
-﻿using OnlineShop.Library.ArticlesService.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Library.ArticlesService.Models;
 using OnlineShop.Library.Common.Interfaces;
 using OnlineShop.Library.Common.Repos;
 
 namespace OnlineShop.OrdersService.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class OrderedArticlesController : RepoControllerBase<OrderedArticle>
     {
         public OrderedArticlesController(IRepo<OrderedArticle> entitiesRepo) : base(entitiesRepo) { }

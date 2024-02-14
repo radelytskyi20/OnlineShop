@@ -6,6 +6,6 @@ namespace OnlineShop.Library.OrdersService.Repo
 {
     public class OrderedArticlesRepo : BaseRepo<OrderedArticle>
     {
-        public OrderedArticlesRepo(OrdersDbContext context) : base(context) { }
+        public OrderedArticlesRepo(OrdersDbContext context) : base(context) { Table = Context.OrderedArticles; }
     }
 }

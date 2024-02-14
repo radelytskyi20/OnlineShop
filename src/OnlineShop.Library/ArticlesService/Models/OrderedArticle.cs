@@ -1,8 +1,8 @@
 ﻿using OnlineShop.Library.Common.Interfaces;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 using OnlineShop.Library.OrdersService.Models;
+using System.Text.Json.Serialization;
 
 namespace OnlineShop.Library.ArticlesService.Models
 {
