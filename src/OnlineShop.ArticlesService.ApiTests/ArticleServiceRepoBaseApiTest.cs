@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Moq;
 using OnlineShop.Library.Clients;
@@ -16,8 +17,8 @@ namespace OnlineShop.ArticlesService.ApiTests
     {
         protected readonly Fixture Fixture = new();
         protected IOptions<ServiceAdressOptions> ServiceAddressOptions;
-        //protected IdentityServerApiOptions IdentityServerApiOptions;
-        //protected IdentityServerClient IdentityServerClient;
+        protected IdentityServerApiOptions IdentityServerApiOptions;
+        protected IdentityServerClient IdentityServerClient;
         protected TClient SystemUnderTest = default!;
 
         public ArticleServiceRepoBaseApiTest()
@@ -34,12 +35,15 @@ namespace OnlineShop.ArticlesService.ApiTests
         }
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             SetServiceAddressOptions();
-            //SetIdentityServerApiOptions();
+            SetIdentityServerApiOptions();
+
+            IdentityServerClient = new IdentityServerClient(new HttpClient(), ServiceAddressOptions);
 
             CreateSystemUnderTest();
+            await AuthorizeSystemUnderTests();
         }
 
         protected virtual void SetServiceAddressOptions()
@@ -56,13 +60,19 @@ namespace OnlineShop.ArticlesService.ApiTests
 
         protected virtual void SetIdentityServerApiOptions()
         {
-            var identityServerApiOptions = new IdentityServerApiOptions()
+            IdentityServerApiOptions = new IdentityServerApiOptions()
             {
                 ClientId = "test.client",
                 ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A",
                 Scope = "OnlineShop.Api",
                 GrantType = "client_credentials"
             };
+        }
+
+        protected virtual async Task AuthorizeSystemUnderTests()
+        {
+            var token = await IdentityServerClient.GetApiToken(IdentityServerApiOptions);
+            SystemUnderTest.HttpClient.SetBearerToken(token.AccessToken);
         }
 
         /// <summary>

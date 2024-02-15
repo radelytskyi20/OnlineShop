@@ -13,7 +13,7 @@ namespace OnlineShop.OrdersService.ApiTests
     public class OrdersRepoClientTests
     {
         private readonly Fixture _fixture = new();
-        //private IdentityServerClient _identityServerClient;
+        private IdentityServerClient _identityServerClient;
         private OrdersClient _systemUnderTest;
 
         public OrdersRepoClientTests()
@@ -25,7 +25,7 @@ namespace OnlineShop.OrdersService.ApiTests
         }
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
             var serviceAddressOptionsMock = new Mock<IOptions<ServiceAdressOptions>>();
             serviceAddressOptionsMock.Setup(x => x.Value)
@@ -35,19 +35,19 @@ namespace OnlineShop.OrdersService.ApiTests
                     OrdersService = "https://localhost:5005"
                 });
 
-            //_identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
+            _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
             _systemUnderTest = new OrdersClient(new HttpClient(), serviceAddressOptionsMock.Object);
 
-            //var identityServerApiOptions = new IdentityServerApiOptions()
-            //{
-            //    ClientId = "test.client",
-            //    ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A",
-            //    Scope = "OnlineShop.Api",
-            //    GrantType = "client_credentials"
-            //};
+            var identityServerApiOptions = new IdentityServerApiOptions()
+            {
+                ClientId = "test.client",
+                ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A",
+                Scope = "OnlineShop.Api",
+                GrantType = "client_credentials"
+            };
 
-            //var token = await _identityServerClient.GetApiToken(identityServerApiOptions);
-            //_systemUnderTest.HttpClient.SetBearerToken(token.AccessToken);
+            var token = await _identityServerClient.GetApiToken(identityServerApiOptions);
+            _systemUnderTest.HttpClient.SetBearerToken(token.AccessToken);
         }
 
         [Test]

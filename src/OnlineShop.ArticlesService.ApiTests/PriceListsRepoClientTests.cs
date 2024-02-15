@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using IdentityModel.Client;
 using OnlineShop.Library.ArticlesService.Models;
 using OnlineShop.Library.Clients.ArticlesService;
 
@@ -56,6 +57,13 @@ namespace OnlineShop.ArticlesService.ApiTests
         {
             SystemUnderTest = new PriceListsClient(new HttpClient(), ServiceAddressOptions);
             ArticlesClient = new ArticlesClient(new HttpClient(), ServiceAddressOptions);
+        }
+
+        protected override async Task AuthorizeSystemUnderTests()
+        {
+            var token = await IdentityServerClient.GetApiToken(IdentityServerApiOptions);
+            SystemUnderTest.HttpClient.SetBearerToken(token.AccessToken);
+            ArticlesClient.HttpClient.SetBearerToken(token.AccessToken);
         }
 
         protected override PriceList CreateExpectedEntity() => 
