@@ -10,6 +10,6 @@ namespace OnlineShop.Library.OrdersService.Repo
         public OrdersRepo(OrdersDbContext context) : base(context) { Table = Context.Orders; }
 
         public override async Task<IEnumerable<Order>> GetAllAsync() => await Table.Include(nameof(Order.Articles)).ToListAsync();
-        public override async Task<Order> GetOneAsync(Guid id) => await Task.Run(() => Table.Include(nameof(Order.Articles)).FirstOrDefault(entity => entity.Id == id));
+        public override async Task<Order> GetOneAsync(Guid id) => await Table.Include(nameof(Order.Articles)).FirstOrDefaultAsync(entity => entity.Id == id);
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using OnlineShop.Library.Common.Interfaces;
 
 namespace OnlineShop.Library.OrdersService.Models
 {
-    public class OrderStatusTrack
+    public class OrderStatusTrack : IIdentifiable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
