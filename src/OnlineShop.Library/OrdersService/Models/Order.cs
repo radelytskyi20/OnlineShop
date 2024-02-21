@@ -27,5 +27,6 @@ namespace OnlineShop.Library.OrdersService.Models
         public DateTime Modified { get; set; }
 
         public List<OrderedArticle> Articles { get; set; }
+        public List<OrderStatusTrack> OrderStatusTracks { get; set; }
     }
 }
