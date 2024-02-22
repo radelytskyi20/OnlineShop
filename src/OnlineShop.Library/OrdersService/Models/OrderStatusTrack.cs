@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using OnlineShop.Library.Common.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace OnlineShop.Library.OrdersService.Models
 {
@@ -22,6 +23,7 @@ namespace OnlineShop.Library.OrdersService.Models
         [ForeignKey("OrderStatus")]
         public int OrderStatusId { get; set; }
 
+        [JsonIgnore]
         public Order Order { get; set; }
         public OrderStatus OrderStatus { get; set; }
     }

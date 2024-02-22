@@ -55,7 +55,16 @@ namespace OnlineShop.OrdersService.ApiTests
         {
             var expected = _fixture.Build<Order>()
                 .With(o => o.Articles, _fixture.CreateMany<OrderedArticle>().ToList())
+                .Without(o => o.OrderStatusTracks)
                 .Create();
+
+            var orderStatusTracks = _fixture.Build<OrderStatusTrack>()
+                .With(ost => ost.OrderId, expected.Id)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .Without(ost => ost.OrderStatus)
+                .CreateMany();
+            
+            expected.OrderStatusTracks = orderStatusTracks.ToList();
 
             var addResponse = await _systemUnderTest.Add(expected);
             Assert.That(addResponse.IsSuccessfull, Is.True);
@@ -75,11 +84,29 @@ namespace OnlineShop.OrdersService.ApiTests
         {
             var expected1 = _fixture.Build<Order>()
                 .With(o => o.Articles, _fixture.CreateMany<OrderedArticle>().ToList())
+                .Without(o => o.OrderStatusTracks)
                 .Create();
+
+            var orderStatusTracks1 = _fixture.Build<OrderStatusTrack>()
+                .With(ost => ost.OrderId, expected1.Id)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .Without(ost => ost.OrderStatus)
+                .CreateMany();
+
+            expected1.OrderStatusTracks = orderStatusTracks1.ToList();
 
             var expected2 = _fixture.Build<Order>()
                 .With(o => o.Articles, _fixture.CreateMany<OrderedArticle>().ToList())
+                .Without(o => o.OrderStatusTracks)
                 .Create();
+            
+            var orderStatusTracks2 = _fixture.Build<OrderStatusTrack>()
+                .With(ost => ost.OrderId, expected1.Id)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .Without(ost => ost.OrderStatus)
+                .CreateMany();
+
+            expected2.OrderStatusTracks = orderStatusTracks2.ToList();
 
             var ordersToAdd = new[] { expected1, expected2 };
 
@@ -106,15 +133,27 @@ namespace OnlineShop.OrdersService.ApiTests
             var orderedArticles = _fixture.CreateMany<OrderedArticle>().ToList();
             var expected = _fixture.Build<Order>()
                 .With(o => o.Articles, orderedArticles)
+                .Without(o => o.OrderStatusTracks)
                 .Create();
+
+            var orderStatusTracks = _fixture.Build<OrderStatusTrack>()
+                .With(ost => ost.OrderId, expected.Id)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .Without(ost => ost.OrderStatus)
+                .CreateMany()
+                .ToList();
+
+            expected.OrderStatusTracks = orderStatusTracks;
 
             var addResponse = await _systemUnderTest.Add(expected);
             Assert.That(addResponse.IsSuccessfull, Is.True);
 
             orderedArticles.ForEach(oa => oa.Name = _fixture.Create<string>());
+            orderStatusTracks.ForEach(ost => ost.Assigned = _fixture.Create<DateTime>());
             expected.UserId = _fixture.Create<Guid>();
             expected.AddressId = _fixture.Create<Guid>();
             expected.Articles = orderedArticles;
+            expected.OrderStatusTracks = orderStatusTracks;
 
             var updateResponse = await _systemUnderTest.Update(expected);
             Assert.That(updateResponse.IsSuccessfull, Is.True);
@@ -135,6 +174,7 @@ namespace OnlineShop.OrdersService.ApiTests
                 Assert.That(expected.UserId, Is.EqualTo(actual.UserId));
                 Assert.That(expected.Created, Is.EqualTo(actual.Created));
                 Assert.That(expected.Articles, Has.Count.EqualTo(actual.Articles.Count));
+                Assert.That(expected.OrderStatusTracks, Has.Count.EqualTo(actual.OrderStatusTracks.Count));
             });
         }
     }

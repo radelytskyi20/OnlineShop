@@ -58,6 +58,7 @@ namespace OnlineShop.OrdersService.ApiTests
         {
             var order = _fixture.Build<Order>()
                 .With(o => o.Articles, Enumerable.Empty<OrderedArticle>().ToList())
+                .Without(o => o.OrderStatusTracks)
                 .Create();
 
             var addOrderResponse = await _ordersClient.Add(order);
@@ -85,6 +86,7 @@ namespace OnlineShop.OrdersService.ApiTests
         {
             var order = _fixture.Build<Order>()
                 .With(o => o.Articles, Enumerable.Empty<OrderedArticle>().ToList())
+                .Without(o => o.OrderStatusTracks)
                 .Create();
 
             var addOrderResponse = await _ordersClient.Add(order);
@@ -123,6 +125,7 @@ namespace OnlineShop.OrdersService.ApiTests
         {
             var order = _fixture.Build<Order>()
                 .With(o => o.Articles, Enumerable.Empty<OrderedArticle>().ToList())
+                .Without(o => o.OrderStatusTracks)
                 .Create();
 
             var addOrderResponse = await _ordersClient.Add(order);

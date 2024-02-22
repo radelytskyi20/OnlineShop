@@ -25,6 +25,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddTransient<IRepo<Order>, OrdersRepo>();
 builder.Services.AddTransient<IRepo<OrderedArticle>, OrderedArticlesRepo>();
+builder.Services.AddTransient<IRepo<OrderStatusTrack>, OrderStatusTracksRepo>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()

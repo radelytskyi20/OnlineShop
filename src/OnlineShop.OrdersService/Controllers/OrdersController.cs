@@ -19,6 +19,7 @@ namespace OnlineShop.OrdersService.Controllers
             destination.UserId = source.UserId;
             destination.Articles = source.Articles;
             destination.Modified = DateTime.UtcNow;
+            destination.OrderStatusTracks = source.OrderStatusTracks;
         }
     }
 }
