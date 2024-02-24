@@ -1,0 +1,9 @@
+POST https://localhost:5006/pricelists/removerange
+Content-Type: application/json
+
+[
+    "AF3EB387-9FA6-40EB-EAE7-08DC20389C17",
+    "2F7C9954-E39E-4708-EAE8-08DC20389C17",
+    "13B9EC89-410E-435E-EAE9-08DC20389C17",
+    "AB3992E3-E07D-4F50-EAEA-08DC20389C17"
+]

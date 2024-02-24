@@ -1,0 +1,4 @@
+POST https://localhost:5006/articles/remove
+Content-Type: application/json
+
+"04D55429-3ADF-4F81-DED1-08DC2032EFD5"

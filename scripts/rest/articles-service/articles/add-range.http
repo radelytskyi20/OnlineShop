@@ -1,0 +1,13 @@
+POST https://localhost:5006/articles/addrange
+Content-Type: application/json
+
+[
+    {
+        "name": "Laptop",
+        "description": "Default Laptop"
+    },
+    {
+        "name": "Gaming laptop",
+        "description": "Gaming laptop"
+    }
+]

@@ -1,0 +1,8 @@
+POST https://localhost:5006/articles/add
+Content-Type: application/json
+
+{
+    "name": "Laptop",
+    "description": "Default Laptop"
+}
+

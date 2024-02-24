@@ -21,47 +21,115 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{2337
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{FE6B4D37-E519-4D61-9C95-65E8C31C2EFA}"
 	ProjectSection(SolutionItems) = preProject
-		scripts\sql\identity_server_clean_up.sql = scripts\sql\identity_server_clean_up.sql
-		scripts\sql\roles_claims_constraints_fix.sql = scripts\sql\roles_claims_constraints_fix.sql
-		scripts\sql\users_clean_up.sql = scripts\sql\users_clean_up.sql
+		scripts\sql\identity-server-clean-up.sql = scripts\sql\identity-server-clean-up.sql
+		scripts\sql\orders-clean-up.sql = scripts\sql\orders-clean-up.sql
+		scripts\sql\roles-claims-constraints-fix.sql = scripts\sql\roles-claims-constraints-fix.sql
+		scripts\sql\users-clean-up.sql = scripts\sql\users-clean-up.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rest", "rest", "{87F679EB-0241-49EA-AB8E-13DB650A6C93}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity-server", "identity-server", "{B1B68E4F-0439-4C7C-B301-B0449FDEDE10}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{085E03CF-D58C-461E-A041-A33DAFB4D5B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.UserManagementService.ApiTests", "src\OnlineShop.UserManagementService.ApiTests\OnlineShop.UserManagementService.ApiTests.csproj", "{20759372-C963-4EAD-9C90-DBA88DB0A5A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ArticlesService", "src\OnlineShop.ArticlesService\OnlineShop.ArticlesService.csproj", "{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.OrdersService", "src\OnlineShop.OrdersService\OnlineShop.OrdersService.csproj", "{87D5D0B4-D603-43F1-B310-1E05206DEEF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.OrdersService.ApiTests", "src\OnlineShop.OrdersService.ApiTests\OnlineShop.OrdersService.ApiTests.csproj", "{8D110124-A7FC-46B7-B102-F4E8DDA16191}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ArticlesService.ApiTests", "src\OnlineShop.ArticlesService.ApiTests\OnlineShop.ArticlesService.ApiTests.csproj", "{8490DE50-D8E5-4F8E-9395-E8D0383081C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "articles-service", "articles-service", "{35FB7963-275B-4333-A679-1CFDB7B18C1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "articles", "articles", "{89AD5BD7-2E46-43C2-9ED0-F1C9CA87081B}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\articles-service\articles\add-range.http = scripts\rest\articles-service\articles\add-range.http
+		scripts\rest\articles-service\articles\add.http = scripts\rest\articles-service\articles\add.http
+		scripts\rest\articles-service\articles\all.http = scripts\rest\articles-service\articles\all.http
+		scripts\rest\articles-service\articles\get-by-id.http = scripts\rest\articles-service\articles\get-by-id.http
+		scripts\rest\articles-service\articles\remove-range.http = scripts\rest\articles-service\articles\remove-range.http
+		scripts\rest\articles-service\articles\remove.http = scripts\rest\articles-service\articles\remove.http
+		scripts\rest\articles-service\articles\update.http = scripts\rest\articles-service\articles\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "price-lists", "price-lists", "{8C3BA532-41D1-4531-89B3-55D068522C92}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\articles-service\price-lists\add-range.http = scripts\rest\articles-service\price-lists\add-range.http
+		scripts\rest\articles-service\price-lists\add.http = scripts\rest\articles-service\price-lists\add.http
+		scripts\rest\articles-service\price-lists\all.http = scripts\rest\articles-service\price-lists\all.http
+		scripts\rest\articles-service\price-lists\get-byid.http = scripts\rest\articles-service\price-lists\get-byid.http
+		scripts\rest\articles-service\price-lists\remove-range.http = scripts\rest\articles-service\price-lists\remove-range.http
+		scripts\rest\articles-service\price-lists\remove.http = scripts\rest\articles-service\price-lists\remove.http
+		scripts\rest\articles-service\price-lists\update.http = scripts\rest\articles-service\price-lists\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity-server", "identity-server", "{1336A7CA-7ACB-441D-904D-DCAE15BE3CF7}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\rest\identity-server\get-token-api-scope.http = scripts\rest\identity-server\get-token-api-scope.http
 		scripts\rest\identity-server\get-token-web-scope.http = scripts\rest\identity-server\get-token-web-scope.http
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "user-management-service", "user-management-service", "{05911AED-1E6B-4FB5-8C31-CE5D4980D416}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "orders-service", "orders-service", "{567731D5-864C-4A08-884C-9D507ED7B668}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "roles-controller", "roles-controller", "{06617137-7DBA-4820-A05A-829C186CD4C2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ordered-articles", "ordered-articles", "{94BC96DB-44B7-4FCD-9E5D-B1DB566D402F}"
 	ProjectSection(SolutionItems) = preProject
-		scripts\rest\user-management-service\roles-controller\add-role.http = scripts\rest\user-management-service\roles-controller\add-role.http
-		scripts\rest\user-management-service\roles-controller\get-all-roles.http = scripts\rest\user-management-service\roles-controller\get-all-roles.http
-		scripts\rest\user-management-service\roles-controller\get-role-by-name.http = scripts\rest\user-management-service\roles-controller\get-role-by-name.http
-		scripts\rest\user-management-service\roles-controller\remove-role.http = scripts\rest\user-management-service\roles-controller\remove-role.http
-		scripts\rest\user-management-service\roles-controller\update-role.http = scripts\rest\user-management-service\roles-controller\update-role.http
+		scripts\rest\orders-service\ordered-articles\add-range.http = scripts\rest\orders-service\ordered-articles\add-range.http
+		scripts\rest\orders-service\ordered-articles\add.http = scripts\rest\orders-service\ordered-articles\add.http
+		scripts\rest\orders-service\ordered-articles\all.http = scripts\rest\orders-service\ordered-articles\all.http
+		scripts\rest\orders-service\ordered-articles\get-by-id.http = scripts\rest\orders-service\ordered-articles\get-by-id.http
+		scripts\rest\orders-service\ordered-articles\remove-range.http = scripts\rest\orders-service\ordered-articles\remove-range.http
+		scripts\rest\orders-service\ordered-articles\remove.http = scripts\rest\orders-service\ordered-articles\remove.http
+		scripts\rest\orders-service\ordered-articles\update.http = scripts\rest\orders-service\ordered-articles\update.http
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users-controller", "users-controller", "{761357BA-B5BB-4789-84DA-FE582F08513F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "orders", "orders", "{0B64A831-AE76-498B-9677-616A3A1C1C2A}"
 	ProjectSection(SolutionItems) = preProject
-		scripts\rest\user-management-service\users-controller\add-user-to-role.http = scripts\rest\user-management-service\users-controller\add-user-to-role.http
-		scripts\rest\user-management-service\users-controller\add-user-to-roles.http = scripts\rest\user-management-service\users-controller\add-user-to-roles.http
-		scripts\rest\user-management-service\users-controller\add-user.http = scripts\rest\user-management-service\users-controller\add-user.http
-		scripts\rest\user-management-service\users-controller\change-user-password.http = scripts\rest\user-management-service\users-controller\change-user-password.http
-		scripts\rest\user-management-service\users-controller\get-all-users.http = scripts\rest\user-management-service\users-controller\get-all-users.http
-		scripts\rest\user-management-service\users-controller\get-user-by-username.http = scripts\rest\user-management-service\users-controller\get-user-by-username.http
-		scripts\rest\user-management-service\users-controller\remove-user-from-role.http = scripts\rest\user-management-service\users-controller\remove-user-from-role.http
-		scripts\rest\user-management-service\users-controller\remove-user-from-roles.http = scripts\rest\user-management-service\users-controller\remove-user-from-roles.http
-		scripts\rest\user-management-service\users-controller\remove-user.http = scripts\rest\user-management-service\users-controller\remove-user.http
-		scripts\rest\user-management-service\users-controller\update-user.http = scripts\rest\user-management-service\users-controller\update-user.http
+		scripts\rest\orders-service\orders\add-range.http = scripts\rest\orders-service\orders\add-range.http
+		scripts\rest\orders-service\orders\add.http = scripts\rest\orders-service\orders\add.http
+		scripts\rest\orders-service\orders\all.http = scripts\rest\orders-service\orders\all.http
+		scripts\rest\orders-service\orders\get-by-id.http = scripts\rest\orders-service\orders\get-by-id.http
+		scripts\rest\orders-service\orders\remove-range.http = scripts\rest\orders-service\orders\remove-range.http
+		scripts\rest\orders-service\orders\remove.http = scripts\rest\orders-service\orders\remove.http
+		scripts\rest\orders-service\orders\update.http = scripts\rest\orders-service\orders\update.http
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{085E03CF-D58C-461E-A041-A33DAFB4D5B7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "order-status-tracks", "order-status-tracks", "{955D3A4C-76FD-4D32-BB45-5626D2242E67}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\orders-service\order-status-tracks\add-range.http = scripts\rest\orders-service\order-status-tracks\add-range.http
+		scripts\rest\orders-service\order-status-tracks\add.http = scripts\rest\orders-service\order-status-tracks\add.http
+		scripts\rest\orders-service\order-status-tracks\all.http = scripts\rest\orders-service\order-status-tracks\all.http
+		scripts\rest\orders-service\order-status-tracks\get-by-id.http = scripts\rest\orders-service\order-status-tracks\get-by-id.http
+		scripts\rest\orders-service\order-status-tracks\remove-range.http = scripts\rest\orders-service\order-status-tracks\remove-range.http
+		scripts\rest\orders-service\order-status-tracks\remove.http = scripts\rest\orders-service\order-status-tracks\remove.http
+		scripts\rest\orders-service\order-status-tracks\update.http = scripts\rest\orders-service\order-status-tracks\update.http
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.UserManagementService.ApiTests", "src\OnlineShop.UserManagementService.ApiTests\OnlineShop.UserManagementService.ApiTests.csproj", "{20759372-C963-4EAD-9C90-DBA88DB0A5A2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "user-management-service", "user-management-service", "{565DDAAC-E59E-497E-840C-D6875FD1186F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "roles", "roles", "{020D2928-E12A-4BA2-9E0E-98AEAC35D1DF}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\user-management-service\roles\add.http = scripts\rest\user-management-service\roles\add.http
+		scripts\rest\user-management-service\roles\all.http = scripts\rest\user-management-service\roles\all.http
+		scripts\rest\user-management-service\roles\get-by-name.http = scripts\rest\user-management-service\roles\get-by-name.http
+		scripts\rest\user-management-service\roles\remove.http = scripts\rest\user-management-service\roles\remove.http
+		scripts\rest\user-management-service\roles\update.http = scripts\rest\user-management-service\roles\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{4A768189-5FF7-4C3A-B7A3-C0409B07959B}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\user-management-service\users\add-to-role.http = scripts\rest\user-management-service\users\add-to-role.http
+		scripts\rest\user-management-service\users\add-to-roles.http = scripts\rest\user-management-service\users\add-to-roles.http
+		scripts\rest\user-management-service\users\add.http = scripts\rest\user-management-service\users\add.http
+		scripts\rest\user-management-service\users\all.http = scripts\rest\user-management-service\users\all.http
+		scripts\rest\user-management-service\users\change-password.http = scripts\rest\user-management-service\users\change-password.http
+		scripts\rest\user-management-service\users\get-by-username.http = scripts\rest\user-management-service\users\get-by-username.http
+		scripts\rest\user-management-service\users\remove-from-role.http = scripts\rest\user-management-service\users\remove-from-role.http
+		scripts\rest\user-management-service\users\remove-from-roles.http = scripts\rest\user-management-service\users\remove-from-roles.http
+		scripts\rest\user-management-service\users\remove.http = scripts\rest\user-management-service\users\remove.http
+		scripts\rest\user-management-service\users\update.http = scripts\rest\user-management-service\users\update.http
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +157,22 @@ Global
 		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20759372-C963-4EAD-9C90-DBA88DB0A5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D5D0B4-D603-43F1-B310-1E05206DEEF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D5D0B4-D603-43F1-B310-1E05206DEEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D5D0B4-D603-43F1-B310-1E05206DEEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D5D0B4-D603-43F1-B310-1E05206DEEF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D110124-A7FC-46B7-B102-F4E8DDA16191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D110124-A7FC-46B7-B102-F4E8DDA16191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D110124-A7FC-46B7-B102-F4E8DDA16191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D110124-A7FC-46B7-B102-F4E8DDA16191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,11 +184,22 @@ Global
 		{B5DC4CF0-FC6D-47FE-853C-3858E0BD9340} = {80249F15-50A7-4783-88DD-45D76A3BDD07}
 		{FE6B4D37-E519-4D61-9C95-65E8C31C2EFA} = {23374A74-B464-4D25-A0A3-586D8AD51381}
 		{87F679EB-0241-49EA-AB8E-13DB650A6C93} = {23374A74-B464-4D25-A0A3-586D8AD51381}
-		{B1B68E4F-0439-4C7C-B301-B0449FDEDE10} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
-		{05911AED-1E6B-4FB5-8C31-CE5D4980D416} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
-		{06617137-7DBA-4820-A05A-829C186CD4C2} = {05911AED-1E6B-4FB5-8C31-CE5D4980D416}
-		{761357BA-B5BB-4789-84DA-FE582F08513F} = {05911AED-1E6B-4FB5-8C31-CE5D4980D416}
 		{20759372-C963-4EAD-9C90-DBA88DB0A5A2} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
+		{E1F6A2B4-C123-4EE1-86CA-72C6F0B85C04} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
+		{87D5D0B4-D603-43F1-B310-1E05206DEEF6} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
+		{8D110124-A7FC-46B7-B102-F4E8DDA16191} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
+		{8490DE50-D8E5-4F8E-9395-E8D0383081C2} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
+		{35FB7963-275B-4333-A679-1CFDB7B18C1D} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
+		{89AD5BD7-2E46-43C2-9ED0-F1C9CA87081B} = {35FB7963-275B-4333-A679-1CFDB7B18C1D}
+		{8C3BA532-41D1-4531-89B3-55D068522C92} = {35FB7963-275B-4333-A679-1CFDB7B18C1D}
+		{1336A7CA-7ACB-441D-904D-DCAE15BE3CF7} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
+		{567731D5-864C-4A08-884C-9D507ED7B668} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
+		{94BC96DB-44B7-4FCD-9E5D-B1DB566D402F} = {567731D5-864C-4A08-884C-9D507ED7B668}
+		{0B64A831-AE76-498B-9677-616A3A1C1C2A} = {567731D5-864C-4A08-884C-9D507ED7B668}
+		{955D3A4C-76FD-4D32-BB45-5626D2242E67} = {567731D5-864C-4A08-884C-9D507ED7B668}
+		{565DDAAC-E59E-497E-840C-D6875FD1186F} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
+		{020D2928-E12A-4BA2-9E0E-98AEAC35D1DF} = {565DDAAC-E59E-497E-840C-D6875FD1186F}
+		{4A768189-5FF7-4C3A-B7A3-C0409B07959B} = {565DDAAC-E59E-497E-840C-D6875FD1186F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}

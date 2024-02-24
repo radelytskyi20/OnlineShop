@@ -1,6 +1,7 @@
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
 using OnlineShop.Library.UserManagementService.Models;
@@ -9,14 +10,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "UserManagementService",
+        Version = "v1"
+    });
+});
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<UsersDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString(ConnectionNames.UserConnection));
 });
     
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(
@@ -46,6 +55,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "UserManagementService v1");
+});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

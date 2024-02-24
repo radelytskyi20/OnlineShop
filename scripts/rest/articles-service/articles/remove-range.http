@@ -1,0 +1,9 @@
+POST https://localhost:5006/articles/removerange
+Content-Type: application/json
+
+[
+    "911334DA-11F9-4916-DED2-08DC2032EFD5",
+    "DF08B9DA-7CC4-4491-DED3-08DC2032EFD5",
+    "3C025E60-F965-46A1-DED4-08DC2032EFD5",
+    "0B0E762E-8661-4445-DED5-08DC2032EFD5"
+]
