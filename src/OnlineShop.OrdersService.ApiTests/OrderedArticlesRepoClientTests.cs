@@ -76,6 +76,9 @@ namespace OnlineShop.OrdersService.ApiTests
             var actual = getOneResponse.Payload;
 
             AssertObjectsAreEqual(expected, actual);
+
+            var removeOrderedArticleResponse = await _systemUnderTest.Remove(addOrderedArticleResponse.Payload);
+            Assert.That(removeOrderedArticleResponse.IsSuccessfull, Is.True);
             
             var removeOrederResponse = await _ordersClient.Remove(addOrderResponse.Payload);
             Assert.That(removeOrederResponse.IsSuccessfull, Is.True);
@@ -115,6 +118,9 @@ namespace OnlineShop.OrdersService.ApiTests
                 var actualOrder = addedOrderedArticles.Single(o => o.Id == orderedArticleId);
                 AssertObjectsAreEqual(expectedOrder, actualOrder);
             }
+
+            var removeOrderedArticleResponse = await _systemUnderTest.RemoveRange(addOrderedArticleResponse.Payload);
+            Assert.That(removeOrderedArticleResponse.IsSuccessfull, Is.True);
 
             var removeOrederResponse = await _ordersClient.Remove(order.Id);
             Assert.That(removeOrederResponse.IsSuccessfull, Is.True);

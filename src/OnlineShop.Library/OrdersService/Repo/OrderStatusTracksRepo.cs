@@ -7,7 +7,7 @@ namespace OnlineShop.Library.OrdersService.Repo
 {
     public class OrderStatusTracksRepo : BaseRepo<OrderStatusTrack>
     {
-        public OrderStatusTracksRepo(OrdersDbContext context) : base(context) { }
+        public OrderStatusTracksRepo(OrdersDbContext context) : base(context) { Table = Context.OrderStatusTracks; }
         public override async Task<OrderStatusTrack> GetOneAsync(Guid id) => await Table.Include(nameof(OrderStatusTrack.OrderStatus)).FirstOrDefaultAsync(entity => entity.Id == id);
         public override async Task<IEnumerable<OrderStatusTrack>> GetAllAsync() => await Table.Include(nameof(OrderStatusTrack.OrderStatus)).ToListAsync();
     }

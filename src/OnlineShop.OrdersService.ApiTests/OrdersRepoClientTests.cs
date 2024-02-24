@@ -16,6 +16,9 @@ namespace OnlineShop.OrdersService.ApiTests
         private IdentityServerClient _identityServerClient;
         private OrdersClient _systemUnderTest;
 
+        //max id value from OrderStatuses table; see OrdersDbContext.cs, OnModelCreating method
+        private const int _maxOrderStatusId = 4;
+
         public OrdersRepoClientTests()
         {
             _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
@@ -60,7 +63,7 @@ namespace OnlineShop.OrdersService.ApiTests
 
             var orderStatusTracks = _fixture.Build<OrderStatusTrack>()
                 .With(ost => ost.OrderId, expected.Id)
-                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % _maxOrderStatusId + 1) //random value from 1 to 4
                 .Without(ost => ost.OrderStatus)
                 .CreateMany();
             
@@ -89,7 +92,7 @@ namespace OnlineShop.OrdersService.ApiTests
 
             var orderStatusTracks1 = _fixture.Build<OrderStatusTrack>()
                 .With(ost => ost.OrderId, expected1.Id)
-                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % _maxOrderStatusId + 1)
                 .Without(ost => ost.OrderStatus)
                 .CreateMany();
 
@@ -102,7 +105,7 @@ namespace OnlineShop.OrdersService.ApiTests
             
             var orderStatusTracks2 = _fixture.Build<OrderStatusTrack>()
                 .With(ost => ost.OrderId, expected1.Id)
-                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % _maxOrderStatusId + 1)
                 .Without(ost => ost.OrderStatus)
                 .CreateMany();
 
@@ -114,6 +117,7 @@ namespace OnlineShop.OrdersService.ApiTests
             Assert.That(addRangeResponse.IsSuccessfull, Is.True);
 
             var getAllResponse = await _systemUnderTest.GetAll();
+            Assert.That(getAllResponse.IsSuccessfull, Is.True);
             var addedOrders = getAllResponse.Payload;
 
             foreach (var orderId in addRangeResponse.Payload)
@@ -138,7 +142,7 @@ namespace OnlineShop.OrdersService.ApiTests
 
             var orderStatusTracks = _fixture.Build<OrderStatusTrack>()
                 .With(ost => ost.OrderId, expected.Id)
-                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % 4 + 1)
+                .With(ost => ost.OrderStatusId, _fixture.Create<int>() % _maxOrderStatusId + 1)
                 .Without(ost => ost.OrderStatus)
                 .CreateMany()
                 .ToList();
