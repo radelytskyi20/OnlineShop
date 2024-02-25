@@ -131,6 +131,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{4A768189
 		scripts\rest\user-management-service\users\update.http = scripts\rest\user-management-service\users\update.http
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.ApiService", "src\OnlineShop.ApiService\OnlineShop.ApiService.csproj", "{A972605E-2776-4175-888C-E36274B3367D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,10 @@ Global
 		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +206,7 @@ Global
 		{565DDAAC-E59E-497E-840C-D6875FD1186F} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
 		{020D2928-E12A-4BA2-9E0E-98AEAC35D1DF} = {565DDAAC-E59E-497E-840C-D6875FD1186F}
 		{4A768189-5FF7-4C3A-B7A3-C0409B07959B} = {565DDAAC-E59E-497E-840C-D6875FD1186F}
+		{A972605E-2776-4175-888C-E36274B3367D} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}
