@@ -1,10 +1,10 @@
-﻿using IdentityModel.Client;
-using Microsoft.Extensions.Options;
-using OnlineShop.Library.Clients;
+﻿using Microsoft.Extensions.Options;
 using OnlineShop.Library.Clients.IdentityServer;
+using OnlineShop.Library.Clients;
 using OnlineShop.Library.Options;
+using IdentityModel.Client;
 
-namespace OnlineShop.Library.ApiService.Authorization
+namespace OnlineShop.ApiService.Authorization
 {
     /// <summary>
     /// Provides functionality for authorizing HTTP clients using an identity server
@@ -29,5 +29,4 @@ namespace OnlineShop.Library.ApiService.Authorization
             clientContainer.HttpClient.SetBearerToken(token.AccessToken);
         }
     }
-
 }

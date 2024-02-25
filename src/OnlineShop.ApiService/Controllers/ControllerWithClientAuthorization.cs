@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Library.ApiService.Authorization;
+using OnlineShop.ApiService.Authorization;
 using OnlineShop.Library.Clients;
 
-namespace OnlineShop.Library.ApiService.BaseControllers
+namespace OnlineShop.ApiService.Controllers
 {
     /// <summary>
     /// Provides a base controller with client authorization.   

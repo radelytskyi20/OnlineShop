@@ -1,6 +1,6 @@
 ﻿using OnlineShop.Library.Clients;
 
-namespace OnlineShop.Library.ApiService.Authorization
+namespace OnlineShop.ApiService.Authorization
 {
     /// <summary>
     /// Defines contract to authorize requests from API to particular services like UserManagementService, OrderService, etc
@@ -12,5 +12,4 @@ namespace OnlineShop.Library.ApiService.Authorization
         /// </summary>
         Task Authorize(IHttpClientContainer clientContainer);
     }
-
 }
