@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Library.Clients
 {
-    public interface IRepoClient<T>
+    public interface IRepoClient<T> : IHttpClientContainer
     {
         Task<ServiceResponse<Guid>> Add(T entity);
         Task<ServiceResponse<IEnumerable<Guid>>> AddRange(IEnumerable<T> entities);

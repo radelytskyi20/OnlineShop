@@ -7,7 +7,7 @@ using System.Text;
 
 namespace OnlineShop.Library.Clients
 {
-    public abstract class RepoClientBase<T> : IRepoClient<T>, IHttpClientContainer
+    public abstract class RepoClientBase<T> : IRepoClient<T>
     {
         public RepoClientBase(HttpClient client, IOptions<ServiceAdressOptions> options)
         {
