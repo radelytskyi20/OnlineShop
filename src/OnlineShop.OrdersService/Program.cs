@@ -1,6 +1,7 @@
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OnlineShop.Library.ArticlesService.Models;
 using OnlineShop.Library.Common.Interfaces;
@@ -31,12 +32,12 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication(
-    IdentityServerAuthenticationDefaults.AuthenticationScheme)
-    .AddIdentityServerAuthentication(options =>
+builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+    .AddJwtBearer(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
     {
         options.Authority = "https://localhost:5001";
         options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters() { ValidateAudience = false };
     });
 
 builder.Services.AddAuthorization(options =>
@@ -78,8 +79,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
