@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.ApiService.Authorization;
 using OnlineShop.Library.Clients;
 using OnlineShop.Library.Constants;
@@ -8,6 +9,7 @@ namespace OnlineShop.ApiService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrderStatusTracksController : ControllerWithClientAuthorization<IRepoClient<OrderStatusTrack>>
     {
         public OrderStatusTracksController(IRepoClient<OrderStatusTrack> client, IClientAuthorization clientAuthorization) : base(client, clientAuthorization)

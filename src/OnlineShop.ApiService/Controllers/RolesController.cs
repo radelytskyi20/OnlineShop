@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.ApiService.Authorization;
 using OnlineShop.Library.Clients.UserManagementService;
@@ -8,6 +9,7 @@ namespace OnlineShop.ApiService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class RolesController : ControllerWithClientAuthorization<IRolesClient>
     {
         public RolesController(IRolesClient client, IClientAuthorization clientAuthorization) : base(client, clientAuthorization)

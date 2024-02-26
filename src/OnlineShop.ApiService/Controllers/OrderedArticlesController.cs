@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.ApiService.Authorization;
 using OnlineShop.Library.ArticlesService.Models;
 using OnlineShop.Library.Clients;
@@ -8,6 +9,7 @@ namespace OnlineShop.ApiService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrderedArticlesController : ControllerWithClientAuthorization<IRepoClient<OrderedArticle>>
     {
         public OrderedArticlesController(IRepoClient<OrderedArticle> client, IClientAuthorization clientAuthorization) : base(client, clientAuthorization)
@@ -48,7 +50,7 @@ namespace OnlineShop.ApiService.Controllers
             return NoContent();
         }
 
-        [HttpPost(RepoActions.AddRange)]
+        [HttpPost(RepoActions.RemoveRange)]
         public virtual async Task<IActionResult> RemoveRange([FromBody] IEnumerable<Guid> ids)
         {
             await Client.RemoveRange(ids);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.ApiService.Authorization;
 using OnlineShop.Library.ArticlesService.Models;
 using OnlineShop.Library.Clients;
@@ -8,6 +9,7 @@ namespace OnlineShop.ApiService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class PriceListsController : ControllerWithClientAuthorization<IRepoClient<PriceList>>
     {
         public PriceListsController(IRepoClient<PriceList> client, IClientAuthorization clientAuthorization) : base(client, clientAuthorization)
