@@ -5,7 +5,7 @@ using OnlineShop.Library.UserManagementService.Responses;
 
 namespace OnlineShop.Library.Clients.UserManagementService
 {
-    public interface IUsersClient
+    public interface IUsersClient : IHttpClientContainer
     {
         Task<IdentityResult> Add(CreateUserRequest request);
 

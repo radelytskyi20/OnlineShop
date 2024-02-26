@@ -21,9 +21,9 @@ namespace OnlineShop.UserManagementService.Controllers
         }
 
         [HttpPost(RepoActions.Add)]
-        public Task<IdentityResult> Add(CreateUserRequest request)
+        public async Task<IdentityResult> Add(CreateUserRequest request)
         {
-            var result = _userManager.CreateAsync(request.User, request.Password);
+            var result = await _userManager.CreateAsync(request.User, request.Password);
             return result;
         }
 
@@ -46,16 +46,16 @@ namespace OnlineShop.UserManagementService.Controllers
         }
 
         [HttpPost(RepoActions.Remove)]
-        public Task<IdentityResult> Remove(ApplicationUser user)
+        public async Task<IdentityResult> Remove(ApplicationUser user)
         {
-            var result = _userManager.DeleteAsync(user);
+            var result = await _userManager.DeleteAsync(user);
             return result;
         }
 
         [HttpGet]
-        public Task<ApplicationUser?> Get(string userName)
+        public async Task<ApplicationUser?> Get(string userName)
         {
-            var result = _userManager.Users
+            var result = await _userManager.Users
                 .Include(u => u.DefaultAddress)
                 .Include(u => u.DeliveryAddress)
                 .FirstOrDefaultAsync(u => u.UserName == userName); //improve in the future

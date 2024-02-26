@@ -17,9 +17,9 @@ namespace OnlineShop.UserManagementService.Controllers
         }
 
         [HttpPost(RepoActions.Add)]
-        public Task<IdentityResult> Add(IdentityRole role)
+        public async Task<IdentityResult> Add(IdentityRole role)
         {
-            var result = _roleManager.CreateAsync(role);
+            var result = await _roleManager.CreateAsync(role);
             return result;
         }
 
@@ -37,16 +37,16 @@ namespace OnlineShop.UserManagementService.Controllers
         }
 
         [HttpPost(RepoActions.Remove)]
-        public Task<IdentityResult> Remove(IdentityRole role)
+        public async Task<IdentityResult> Remove(IdentityRole role)
         {
-            var result = _roleManager.DeleteAsync(role);
+            var result = await _roleManager.DeleteAsync(role);
             return result;
         }
 
         [HttpGet]
-        public Task<IdentityRole> Get(string name)
+        public async Task<IdentityRole> Get(string name)
         {
-            var result = _roleManager.FindByNameAsync(name);
+            var result = await _roleManager.FindByNameAsync(name);
             return result;
         }
 
