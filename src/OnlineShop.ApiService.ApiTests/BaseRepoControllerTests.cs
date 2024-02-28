@@ -7,13 +7,14 @@ using OnlineShop.Library.Options;
 
 namespace OnlineShop.ApiService.ApiTests
 {
-    public abstract class BaseRepoControllerTests
+    public abstract class BaseRepoControllerTests<TEntity>
     {
         protected readonly Fixture Fixture = new Fixture();
         protected IIdentityServerClient IdentityServerClient;
         protected HttpClient SystemUnderTests;
         
         protected string ControllerName { get; set; } = string.Empty;
+        protected string MediaType { get; set; } = "application/json";
 
         public BaseRepoControllerTests()
         {
@@ -46,6 +47,6 @@ namespace OnlineShop.ApiService.ApiTests
             SystemUnderTests.SetBearerToken(token.AccessToken); //authorize api service
         }
 
-        protected abstract void AssertObjectsAreEqual<TEntity>(TEntity expected, TEntity actual);
+        protected abstract void AssertObjectsAreEqual(TEntity expected, TEntity actual);
     }
 }
