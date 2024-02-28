@@ -1,9 +1,10 @@
-﻿using OnlineShop.Library.Constants;
-
-namespace OnlineShop.Library.Options
+﻿namespace OnlineShop.Library.Options
 {
-    //класс для хранения опций для identity server
-    public class IdentityServerApiOptions //убрать уже заданные значения 
+    /// <summary>
+    /// Represents the model to store options to get access token for Api scope of IdentityServer.
+    /// We get values for this model from appsettings.json by using IOptions implementation
+    /// </summary>
+    public class IdentityServerApiOptions
     {
         public const string SectionName = nameof(IdentityServerApiOptions);
         public string ClientId { get; set; }
