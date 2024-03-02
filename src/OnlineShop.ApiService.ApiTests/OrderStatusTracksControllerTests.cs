@@ -74,12 +74,12 @@ namespace OnlineShop.ApiService.ApiTests
 
             var orderStatusTracksToAdd = new[] { expected1, expected2 };
 
-            var addRangeOrderStatusTracksJsonContent = JsonConvert.SerializeObject(orderStatusTracksToAdd);
-            var addRangeOrderStatusTracksHttpContent = new StringContent(addRangeOrderStatusTracksJsonContent, Encoding.UTF8, MediaType);
-            var addRangeOrderStatusTracksResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.AddRange}", addRangeOrderStatusTracksHttpContent);
-            Assert.That(addRangeOrderStatusTracksResponse.IsSuccessStatusCode, Is.True);
+            var addRangeJsonContent = JsonConvert.SerializeObject(orderStatusTracksToAdd);
+            var addRangeHttpContent = new StringContent(addRangeJsonContent, Encoding.UTF8, MediaType);
+            var addRangeResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.AddRange}", addRangeHttpContent);
+            Assert.That(addRangeResponse.IsSuccessStatusCode, Is.True);
             
-            var addRangeResponseContent = await addRangeOrderStatusTracksResponse.Content.ReadAsStringAsync();
+            var addRangeResponseContent = await addRangeResponse.Content.ReadAsStringAsync();
             var addedOrderStatusTracksIds = JsonConvert.DeserializeObject<IEnumerable<Guid>>(addRangeResponseContent);
             Assert.That(addedOrderStatusTracksIds, Is.Not.Null);
 
@@ -150,17 +150,17 @@ namespace OnlineShop.ApiService.ApiTests
 
         protected virtual async Task AddOrderAndAssert(Order order)
         {
-            var addOrderJsonContent = JsonConvert.SerializeObject(order);
-            var addOrderHttpContent = new StringContent(addOrderJsonContent, Encoding.UTF8, MediaType);
-            var addOrderResponse = await SystemUnderTests.PostAsync($"orders/{RepoActions.Add}", addOrderHttpContent);
-            Assert.That(addOrderResponse.IsSuccessStatusCode, Is.True);
+            var addJsonContent = JsonConvert.SerializeObject(order);
+            var addHttpContent = new StringContent(addJsonContent, Encoding.UTF8, MediaType);
+            var addResponse = await SystemUnderTests.PostAsync($"orders/{RepoActions.Add}", addHttpContent);
+            Assert.That(addResponse.IsSuccessStatusCode, Is.True);
         }
         protected virtual async Task RemoveOrderAndAssert(Guid id)
         {
-            var removeOrderJsonContent = JsonConvert.SerializeObject(id);
-            var removeOrderHttpContent = new StringContent(removeOrderJsonContent, Encoding.UTF8, MediaType);
-            var removeOrderResponse = await SystemUnderTests.PostAsync($"orders/{RepoActions.Remove}", removeOrderHttpContent);
-            Assert.That(removeOrderResponse.IsSuccessStatusCode, Is.True);
+            var removeJsonContent = JsonConvert.SerializeObject(id);
+            var removeHttpContent = new StringContent(removeJsonContent, Encoding.UTF8, MediaType);
+            var removeResponse = await SystemUnderTests.PostAsync($"orders/{RepoActions.Remove}", removeHttpContent);
+            Assert.That(removeResponse.IsSuccessStatusCode, Is.True);
         }
 
         protected override void AssertObjectsAreEqual(OrderStatusTrack expected, OrderStatusTrack actual)

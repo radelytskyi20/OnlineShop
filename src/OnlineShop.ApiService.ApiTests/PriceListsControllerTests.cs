@@ -26,10 +26,10 @@ namespace OnlineShop.ApiService.ApiTests
                 .With(pl => pl.ArticleId, article.Id)
                 .Create();
 
-            var addPriceListJsonContent = JsonConvert.SerializeObject(expected);
-            var addPriceListHttpContent = new StringContent(addPriceListJsonContent, Encoding.UTF8, MediaType);
-            var addPriceListResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Add}", addPriceListHttpContent);
-            Assert.That(addPriceListResponse.IsSuccessStatusCode, Is.True);
+            var addJsonContent = JsonConvert.SerializeObject(expected);
+            var addHttpContent = new StringContent(addJsonContent, Encoding.UTF8, MediaType);
+            var addResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Add}", addHttpContent);
+            Assert.That(addResponse.IsSuccessStatusCode, Is.True);
 
             var getOneResponse = await SystemUnderTests.GetAsync($"{ControllerName}?id={expected.Id}");
             Assert.That(getOneResponse.IsSuccessStatusCode, Is.True);
@@ -39,10 +39,10 @@ namespace OnlineShop.ApiService.ApiTests
 
             AssertObjectsAreEqual(expected, actual);
 
-            var removePriceListJsonContent = JsonConvert.SerializeObject(actual.Id);
-            var removePriceListHttpContent = new StringContent(removePriceListJsonContent, Encoding.UTF8, MediaType);
-            var removePriceListResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Remove}", removePriceListHttpContent);
-            Assert.That(removePriceListResponse.IsSuccessStatusCode, Is.True);
+            var removeJsonContent = JsonConvert.SerializeObject(actual.Id);
+            var removeHttpContent = new StringContent(removeJsonContent, Encoding.UTF8, MediaType);
+            var removeResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Remove}", removeHttpContent);
+            Assert.That(removeResponse.IsSuccessStatusCode, Is.True);
 
             var removeArticleJsonContent = JsonConvert.SerializeObject(article.Id);
             var removeArticleHttpContent = new StringContent(removeArticleJsonContent, Encoding.UTF8, MediaType);
@@ -93,10 +93,10 @@ namespace OnlineShop.ApiService.ApiTests
                 AssertObjectsAreEqual(expected, actual);
             }
 
-            var removeRangePriceListsJsonContent = JsonConvert.SerializeObject(addedPriceListsIds);
-            var removeRangePriceListsHttpContent = new StringContent(removeRangePriceListsJsonContent, Encoding.UTF8, MediaType);
-            var removeRangePriceListsResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.RemoveRange}", removeRangePriceListsHttpContent);
-            Assert.That(removeRangePriceListsResponse.IsSuccessStatusCode, Is.True);
+            var removeRangeJsonContent = JsonConvert.SerializeObject(addedPriceListsIds);
+            var removeRangeHttpContent = new StringContent(removeRangeJsonContent, Encoding.UTF8, MediaType);
+            var removeRangeResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.RemoveRange}", removeRangeHttpContent);
+            Assert.That(removeRangeResponse.IsSuccessStatusCode, Is.True);
 
             var removeArticleJsonContent = JsonConvert.SerializeObject(article.Id);
             var removeArticleHttpContent = new StringContent(removeArticleJsonContent, Encoding.UTF8, MediaType);
@@ -120,20 +120,20 @@ namespace OnlineShop.ApiService.ApiTests
                 .With(pl => pl.ArticleId, article.Id)
                 .Create();
 
-            var addPriceListJsonContent = JsonConvert.SerializeObject(expected);
-            var addPriceListHttpContent = new StringContent(addPriceListJsonContent, Encoding.UTF8, MediaType); 
-            var addPriceListResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Add}", addPriceListHttpContent);
-            Assert.That(addPriceListResponse.IsSuccessStatusCode, Is.True);
+            var addJsonContent = JsonConvert.SerializeObject(expected);
+            var addHttpContent = new StringContent(addJsonContent, Encoding.UTF8, MediaType); 
+            var addResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Add}", addHttpContent);
+            Assert.That(addResponse.IsSuccessStatusCode, Is.True);
 
             expected.Name = Fixture.Create<string>();
             expected.Price = Fixture.Create<decimal>();
             expected.ValidFrom = Fixture.Create<DateTime>();
             expected.ValidTo = Fixture.Create<DateTime>();
 
-            var updatePriceListJsonContent = JsonConvert.SerializeObject(expected);
-            var updatePriceListHttpContent = new StringContent(updatePriceListJsonContent, Encoding.UTF8, MediaType);
-            var updatePriceListResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Update}", updatePriceListHttpContent);
-            Assert.That(updatePriceListResponse.IsSuccessStatusCode, Is.True);
+            var updateJsonContent = JsonConvert.SerializeObject(expected);
+            var updateHttpContent = new StringContent(updateJsonContent, Encoding.UTF8, MediaType);
+            var updateResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Update}", updateHttpContent);
+            Assert.That(updateResponse.IsSuccessStatusCode, Is.True);
 
             var getOneResponse = await SystemUnderTests.GetAsync($"{ControllerName}?id={expected.Id}");
             Assert.That(getOneResponse.IsSuccessStatusCode, Is.True);
@@ -143,10 +143,10 @@ namespace OnlineShop.ApiService.ApiTests
 
             AssertObjectsAreEqual(expected, actual);
 
-            var removePriceListJsonContent = JsonConvert.SerializeObject(actual.Id);
-            var removePriceListHttpContent = new StringContent(removePriceListJsonContent, Encoding.UTF8, MediaType);
-            var removePriceListResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Remove}", removePriceListHttpContent);
-            Assert.That(removePriceListResponse.IsSuccessStatusCode, Is.True);
+            var removeJsonContent = JsonConvert.SerializeObject(actual.Id);
+            var removeHttpContent = new StringContent(removeJsonContent, Encoding.UTF8, MediaType);
+            var removeResponse = await SystemUnderTests.PostAsync($"{ControllerName}/{RepoActions.Remove}", removeHttpContent);
+            Assert.That(removeResponse.IsSuccessStatusCode, Is.True);
 
             var removeArticleJsonContent = JsonConvert.SerializeObject(article.Id);
             var removeArticleHttpContent = new StringContent(removeArticleJsonContent, Encoding.UTF8, MediaType);
