@@ -20,14 +20,14 @@ namespace OnlineShop.UserManagementService.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost(RepoActions.Add)]
-        public Task<IdentityResult> Add(CreateUserRequest request)
+        [HttpPost(RepoActions.Add)] //+
+        public async Task<IdentityResult> Add(CreateUserRequest request)
         {
-            var result = _userManager.CreateAsync(request.User, request.Password);
+            var result = await _userManager.CreateAsync(request.User, request.Password);
             return result;
         }
 
-        [HttpPost(RepoActions.Update)]
+        [HttpPost(RepoActions.Update)] //+
         public async Task<IdentityResult> Update(ApplicationUser user)
         {
             var userToBeUpdated = await _userManager.FindByNameAsync(user.UserName);
@@ -45,17 +45,17 @@ namespace OnlineShop.UserManagementService.Controllers
             return result;
         }
 
-        [HttpPost(RepoActions.Remove)]
-        public Task<IdentityResult> Remove(ApplicationUser user)
+        [HttpPost(RepoActions.Remove)] //+
+        public async Task<IdentityResult> Remove(ApplicationUser user)
         {
-            var result = _userManager.DeleteAsync(user);
+            var result = await _userManager.DeleteAsync(user);
             return result;
         }
 
-        [HttpGet]
-        public Task<ApplicationUser?> Get(string userName)
+        [HttpGet] //+
+        public async Task<ApplicationUser?> Get(string userName)
         {
-            var result = _userManager.Users
+            var result = await _userManager.Users
                 .Include(u => u.DefaultAddress)
                 .Include(u => u.DeliveryAddress)
                 .FirstOrDefaultAsync(u => u.UserName == userName); //improve in the future
@@ -63,7 +63,7 @@ namespace OnlineShop.UserManagementService.Controllers
             return result;
         }
 
-        [HttpGet(RepoActions.GetAll)]
+        [HttpGet(RepoActions.GetAll)] //+
         public IEnumerable<ApplicationUser> Get()
         {
             var result = _userManager.Users
@@ -73,7 +73,7 @@ namespace OnlineShop.UserManagementService.Controllers
             return result;
         }
 
-        [HttpPost(UsersControllerRoutes.ChangePassword)]
+        [HttpPost(UsersControllerRoutes.ChangePassword)] //+
         public async Task<IdentityResult> ChangePassword(UserPasswordChangeRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);

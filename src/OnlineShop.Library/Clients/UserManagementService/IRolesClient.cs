@@ -3,7 +3,7 @@ using OnlineShop.Library.UserManagementService.Responses;
 
 namespace OnlineShop.Library.Clients.UserManagementService
 {
-    public interface IRolesClient
+    public interface IRolesClient : IHttpClientContainer
     {
         Task<IdentityResult> Add(IdentityRole role);
 

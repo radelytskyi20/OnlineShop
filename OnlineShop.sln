@@ -131,6 +131,90 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{4A768189
 		scripts\rest\user-management-service\users\update.http = scripts\rest\user-management-service\users\update.http
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ApiService", "src\OnlineShop.ApiService\OnlineShop.ApiService.csproj", "{A972605E-2776-4175-888C-E36274B3367D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api-service", "api-service", "{4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "articles", "articles", "{F35D0F5A-331B-42E0-8B38-1A1E274AB2DB}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\articles\add-range.http = scripts\rest\api-service\articles\add-range.http
+		scripts\rest\api-service\articles\add.http = scripts\rest\api-service\articles\add.http
+		scripts\rest\api-service\articles\all.http = scripts\rest\api-service\articles\all.http
+		scripts\rest\api-service\articles\get-by-id.http = scripts\rest\api-service\articles\get-by-id.http
+		scripts\rest\api-service\articles\remove-range.http = scripts\rest\api-service\articles\remove-range.http
+		scripts\rest\api-service\articles\remove.http = scripts\rest\api-service\articles\remove.http
+		scripts\rest\api-service\articles\update.http = scripts\rest\api-service\articles\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ordered-articles", "ordered-articles", "{0CC0FE7C-4E5D-4693-8CFB-FB0CD68E9FAA}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\ordered-articles\add-range.http = scripts\rest\api-service\ordered-articles\add-range.http
+		scripts\rest\api-service\ordered-articles\add.http = scripts\rest\api-service\ordered-articles\add.http
+		scripts\rest\api-service\ordered-articles\all.http = scripts\rest\api-service\ordered-articles\all.http
+		scripts\rest\api-service\ordered-articles\get-by-id.http = scripts\rest\api-service\ordered-articles\get-by-id.http
+		scripts\rest\api-service\ordered-articles\remove-range.http = scripts\rest\api-service\ordered-articles\remove-range.http
+		scripts\rest\api-service\ordered-articles\remove.http = scripts\rest\api-service\ordered-articles\remove.http
+		scripts\rest\api-service\ordered-articles\update.http = scripts\rest\api-service\ordered-articles\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "orders", "orders", "{4F925DA9-B217-4DAB-8C7F-28A32C6151D7}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\orders\add-range.http = scripts\rest\api-service\orders\add-range.http
+		scripts\rest\api-service\orders\add.http = scripts\rest\api-service\orders\add.http
+		scripts\rest\api-service\orders\all.http = scripts\rest\api-service\orders\all.http
+		scripts\rest\api-service\orders\get-by-id.http = scripts\rest\api-service\orders\get-by-id.http
+		scripts\rest\api-service\orders\remove-range.http = scripts\rest\api-service\orders\remove-range.http
+		scripts\rest\api-service\orders\remove.http = scripts\rest\api-service\orders\remove.http
+		scripts\rest\api-service\orders\update.http = scripts\rest\api-service\orders\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "order-status-tracks", "order-status-tracks", "{0BF5480B-3558-4923-BA25-F39F8A590207}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\order-status-tracks\add-range.http = scripts\rest\api-service\order-status-tracks\add-range.http
+		scripts\rest\api-service\order-status-tracks\add.http = scripts\rest\api-service\order-status-tracks\add.http
+		scripts\rest\api-service\order-status-tracks\all.http = scripts\rest\api-service\order-status-tracks\all.http
+		scripts\rest\api-service\order-status-tracks\get-by-id.http = scripts\rest\api-service\order-status-tracks\get-by-id.http
+		scripts\rest\api-service\order-status-tracks\remove-range.http = scripts\rest\api-service\order-status-tracks\remove-range.http
+		scripts\rest\api-service\order-status-tracks\remove.http = scripts\rest\api-service\order-status-tracks\remove.http
+		scripts\rest\api-service\order-status-tracks\update.http = scripts\rest\api-service\order-status-tracks\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "price-lists", "price-lists", "{9BDE46B3-BF39-402C-8FC6-31D4927CE57A}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\price-lists\add-range.http = scripts\rest\api-service\price-lists\add-range.http
+		scripts\rest\api-service\price-lists\add.http = scripts\rest\api-service\price-lists\add.http
+		scripts\rest\api-service\price-lists\all.http = scripts\rest\api-service\price-lists\all.http
+		scripts\rest\api-service\price-lists\get-byid.http = scripts\rest\api-service\price-lists\get-byid.http
+		scripts\rest\api-service\price-lists\remove-range.http = scripts\rest\api-service\price-lists\remove-range.http
+		scripts\rest\api-service\price-lists\remove.http = scripts\rest\api-service\price-lists\remove.http
+		scripts\rest\api-service\price-lists\update.http = scripts\rest\api-service\price-lists\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "roles", "roles", "{4BA0CADC-37FA-448B-A3C5-20E77496DA2D}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\roles\add.http = scripts\rest\api-service\roles\add.http
+		scripts\rest\api-service\roles\all.http = scripts\rest\api-service\roles\all.http
+		scripts\rest\api-service\roles\get-by-name.http = scripts\rest\api-service\roles\get-by-name.http
+		scripts\rest\api-service\roles\remove.http = scripts\rest\api-service\roles\remove.http
+		scripts\rest\api-service\roles\update.http = scripts\rest\api-service\roles\update.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{91CCF44C-C910-49E2-89D6-8B0273239D90}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\rest\api-service\users\add-to-role.http = scripts\rest\api-service\users\add-to-role.http
+		scripts\rest\api-service\users\add-to-roles.http = scripts\rest\api-service\users\add-to-roles.http
+		scripts\rest\api-service\users\add.http = scripts\rest\api-service\users\add.http
+		scripts\rest\api-service\users\all.http = scripts\rest\api-service\users\all.http
+		scripts\rest\api-service\users\change-password.http = scripts\rest\api-service\users\change-password.http
+		scripts\rest\api-service\users\get-by-username.http = scripts\rest\api-service\users\get-by-username.http
+		scripts\rest\api-service\users\remove-from-role.http = scripts\rest\api-service\users\remove-from-role.http
+		scripts\rest\api-service\users\remove-from-roles.http = scripts\rest\api-service\users\remove-from-roles.http
+		scripts\rest\api-service\users\remove.http = scripts\rest\api-service\users\remove.http
+		scripts\rest\api-service\users\update.http = scripts\rest\api-service\users\update.http
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.ApiService.ApiTests", "src\OnlineShop.ApiService.ApiTests\OnlineShop.ApiService.ApiTests.csproj", "{8CF78993-199A-49C1-9B7B-BA0C6A47E348}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +257,14 @@ Global
 		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8490DE50-D8E5-4F8E-9395-E8D0383081C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A972605E-2776-4175-888C-E36274B3367D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF78993-199A-49C1-9B7B-BA0C6A47E348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF78993-199A-49C1-9B7B-BA0C6A47E348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF78993-199A-49C1-9B7B-BA0C6A47E348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF78993-199A-49C1-9B7B-BA0C6A47E348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +292,16 @@ Global
 		{565DDAAC-E59E-497E-840C-D6875FD1186F} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
 		{020D2928-E12A-4BA2-9E0E-98AEAC35D1DF} = {565DDAAC-E59E-497E-840C-D6875FD1186F}
 		{4A768189-5FF7-4C3A-B7A3-C0409B07959B} = {565DDAAC-E59E-497E-840C-D6875FD1186F}
+		{A972605E-2776-4175-888C-E36274B3367D} = {B3AFB29F-2BCB-43FD-91D6-B4B8447785DE}
+		{4ACD9AAE-1EA6-4587-B8E8-C305C04461A9} = {87F679EB-0241-49EA-AB8E-13DB650A6C93}
+		{F35D0F5A-331B-42E0-8B38-1A1E274AB2DB} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{0CC0FE7C-4E5D-4693-8CFB-FB0CD68E9FAA} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{4F925DA9-B217-4DAB-8C7F-28A32C6151D7} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{0BF5480B-3558-4923-BA25-F39F8A590207} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{9BDE46B3-BF39-402C-8FC6-31D4927CE57A} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{4BA0CADC-37FA-448B-A3C5-20E77496DA2D} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{91CCF44C-C910-49E2-89D6-8B0273239D90} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
+		{8CF78993-199A-49C1-9B7B-BA0C6A47E348} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}

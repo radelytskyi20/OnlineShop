@@ -6,5 +6,6 @@ namespace OnlineShop.Library.Clients.IdentityServer
     public interface IIdentityServerClient
     {
         Task<Token> GetApiToken(IdentityServerApiOptions options);
+        Task<Token> GetApiToken(IdentityServerUserNamePassword options);
     }
 }

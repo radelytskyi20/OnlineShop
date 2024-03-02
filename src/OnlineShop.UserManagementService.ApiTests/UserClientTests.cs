@@ -423,17 +423,17 @@ namespace OnlineShop.UserManagementService.ApiTests
                 await RemoveRoleAndAssert(roleToRemove);
         }
 
-        private void AssertObjectsAreEqual(ApplicationUser expected, ApplicationUser acutal)
+        private void AssertObjectsAreEqual(ApplicationUser expected, ApplicationUser actual)
         {
             Assert.Multiple(() =>
             {
-                Assert.That(acutal.UserName, Is.EqualTo(expected.UserName));
-                Assert.That(acutal.Email, Is.EqualTo(expected.Email));
-                Assert.That(acutal.PhoneNumber, Is.EqualTo(expected.PhoneNumber));
-                AssertObjectsAreEqual(expected.DefaultAddress, acutal.DefaultAddress);
-                AssertObjectsAreEqual(expected.DeliveryAddress, acutal.DeliveryAddress);
-                Assert.That(acutal.FirstName, Is.EqualTo(expected.FirstName));
-                Assert.That(acutal.LastName, Is.EqualTo(expected.LastName));
+                Assert.That(actual.UserName, Is.EqualTo(expected.UserName));
+                Assert.That(actual.Email, Is.EqualTo(expected.Email));
+                Assert.That(actual.PhoneNumber, Is.EqualTo(expected.PhoneNumber));
+                AssertObjectsAreEqual(expected.DefaultAddress, actual.DefaultAddress);
+                AssertObjectsAreEqual(expected.DeliveryAddress, actual.DeliveryAddress);
+                Assert.That(actual.FirstName, Is.EqualTo(expected.FirstName));
+                Assert.That(actual.LastName, Is.EqualTo(expected.LastName));
             });
         }
         private void AssertObjectsAreEqual(Address expected, Address actual)
