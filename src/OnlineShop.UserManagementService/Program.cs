@@ -29,22 +29,22 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-    .AddJwtBearer(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
-    {
-        options.Authority = "https://localhost:5001";
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters() { ValidateAudience = false };
-    });
+//builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+//    .AddJwtBearer(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
+//    {
+//        options.Authority = "https://localhost:5001";
+//        options.RequireHttpsMetadata = false;
+//        options.TokenValidationParameters = new TokenValidationParameters() { ValidateAudience = false };
+//    });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("ApiScope", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireClaim("scope", IdConstants.ApiScope);
-    });
-});
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("ApiScope", policy =>
+//    {
+//        policy.RequireAuthenticatedUser();
+//        policy.RequireClaim("scope", IdConstants.ApiScope);
+//    });
+//});
 
 var app = builder.Build();
 
@@ -66,14 +66,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 app.MapControllers();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers().RequireAuthorization("ApiScope");
+    endpoints.MapControllers()/*.RequireAuthorization("ApiScope")*/;
 });
 
 app.Run();

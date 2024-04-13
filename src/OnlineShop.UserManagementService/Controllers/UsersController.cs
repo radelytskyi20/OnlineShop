@@ -10,7 +10,8 @@ namespace OnlineShop.UserManagementService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [AllowAnonymous]
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -20,14 +21,14 @@ namespace OnlineShop.UserManagementService.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost(RepoActions.Add)] //+
+        [HttpPost(RepoActions.Add)]
         public async Task<IdentityResult> Add(CreateUserRequest request)
         {
             var result = await _userManager.CreateAsync(request.User, request.Password);
             return result;
         }
 
-        [HttpPost(RepoActions.Update)] //+
+        [HttpPost(RepoActions.Update)]
         public async Task<IdentityResult> Update(ApplicationUser user)
         {
             var userToBeUpdated = await _userManager.FindByNameAsync(user.UserName);
@@ -45,14 +46,14 @@ namespace OnlineShop.UserManagementService.Controllers
             return result;
         }
 
-        [HttpPost(RepoActions.Remove)] //+
+        [HttpPost(RepoActions.Remove)]
         public async Task<IdentityResult> Remove(ApplicationUser user)
         {
             var result = await _userManager.DeleteAsync(user);
             return result;
         }
 
-        [HttpGet] //+
+        [HttpGet]
         public async Task<ApplicationUser?> Get(string userName)
         {
             var result = await _userManager.Users
@@ -63,7 +64,7 @@ namespace OnlineShop.UserManagementService.Controllers
             return result;
         }
 
-        [HttpGet(RepoActions.GetAll)] //+
+        [HttpGet(RepoActions.GetAll)]
         public IEnumerable<ApplicationUser> Get()
         {
             var result = _userManager.Users
@@ -73,7 +74,7 @@ namespace OnlineShop.UserManagementService.Controllers
             return result;
         }
 
-        [HttpPost(UsersControllerRoutes.ChangePassword)] //+
+        [HttpPost(UsersControllerRoutes.ChangePassword)]
         public async Task<IdentityResult> ChangePassword(UserPasswordChangeRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);

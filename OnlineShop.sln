@@ -213,7 +213,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "users", "users", "{91CCF44C
 		scripts\rest\api-service\users\update.http = scripts\rest\api-service\users\update.http
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.ApiService.ApiTests", "src\OnlineShop.ApiService.ApiTests\OnlineShop.ApiService.ApiTests.csproj", "{8CF78993-199A-49C1-9B7B-BA0C6A47E348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.ApiService.ApiTests", "src\OnlineShop.ApiService.ApiTests\OnlineShop.ApiService.ApiTests.csproj", "{8CF78993-199A-49C1-9B7B-BA0C6A47E348}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{FFF14D5D-B1BF-42B5-857C-BA9ABFDE4E89}"
+	ProjectSection(SolutionItems) = preProject
+		UserManagementService_Dockerfile_Debug = UserManagementService_Dockerfile_Debug
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
