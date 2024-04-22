@@ -10,8 +10,7 @@ namespace OnlineShop.UserManagementService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
-    [AllowAnonymous]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;

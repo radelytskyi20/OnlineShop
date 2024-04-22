@@ -26,7 +26,7 @@ COPY --from=publish /app/publish .
 
 ENV ASPNETCORE_URLS="https://+:5003;http://+:5002"
 ENV ASPNETCORE_ENVIRONMENT=Docker
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/aspnetapp.pfx
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password="pass12345"
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=pass12345
 
-ENTRYPOINT ["dotnet", "OnlineShop.UserManagementService.dll"]
+ENTRYPOINT ["/bin/sh", "-c", "update-ca-certificates && dotnet OnlineShop.UserManagementService.dll"]
