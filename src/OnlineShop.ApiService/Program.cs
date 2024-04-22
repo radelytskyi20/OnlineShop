@@ -48,11 +48,14 @@ builder.Services.AddTransient<IIdentityServerClient, IdentityServerClient>();
 builder.Services.Configure<IdentityServerApiOptions>(builder.Configuration.GetSection(IdentityServerApiOptions.SectionName));
 builder.Services.Configure<ServiceAdressOptions>(builder.Configuration.GetSection(ServiceAdressOptions.SectionName));
 
+var serviceAddressOptions = new ServiceAdressOptions();
+builder.Configuration.GetSection(ServiceAdressOptions.SectionName).Bind(serviceAddressOptions);
+
 builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
     .AddJwtBearer(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
     {
-        options.Authority = "https://localhost:5001";
-        options.RequireHttpsMetadata = false;
+        options.Authority = serviceAddressOptions.IdentityServer;
+        options.RequireHttpsMetadata = true;
         options.TokenValidationParameters = new TokenValidationParameters() { ValidateAudience = false };
     });
 
