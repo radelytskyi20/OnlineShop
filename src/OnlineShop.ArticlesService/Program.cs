@@ -8,6 +8,7 @@ using OnlineShop.Library.ArticlesService.Repo;
 using OnlineShop.Library.Common.Interfaces;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
+using OnlineShop.Library.Options;
 using OnlineShop.Library.UserManagementService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,11 +31,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
 
+var serviceAddressOptions = new ServiceAdressOptions();
+builder.Configuration.GetSection(ServiceAdressOptions.SectionName).Bind(serviceAddressOptions);
+
 builder.Services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
     .AddJwtBearer(IdentityServerAuthenticationDefaults.AuthenticationScheme, options =>
     {
-        options.Authority = "https://localhost:5001";
-        options.RequireHttpsMetadata = false;
+        options.Authority = serviceAddressOptions.IdentityServer;
+        options.RequireHttpsMetadata = true;
         options.TokenValidationParameters = new TokenValidationParameters() { ValidateAudience = false };
     });
 
