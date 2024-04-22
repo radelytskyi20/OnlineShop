@@ -218,6 +218,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{FFF14D5D-B1BF-42B5-857C-BA9ABFDE4E89}"
 	ProjectSection(SolutionItems) = preProject
 		IdentityServer_Dockerfile_Debug = IdentityServer_Dockerfile_Debug
+		OrdersService_Dockerfile_Debug = OrdersService_Dockerfile_Debug
 		UserManagementService_Dockerfile_Debug = UserManagementService_Dockerfile_Debug
 	EndProjectSection
 EndProject
