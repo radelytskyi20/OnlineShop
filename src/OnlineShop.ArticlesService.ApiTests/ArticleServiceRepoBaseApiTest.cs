@@ -49,12 +49,29 @@ namespace OnlineShop.ArticlesService.ApiTests
         protected virtual void SetServiceAddressOptions()
         {
             var serviceAddressOptionsMock = new Mock<IOptions<ServiceAdressOptions>>();
-            serviceAddressOptionsMock.Setup(x => x.Value)
-                .Returns(new ServiceAdressOptions()
-                {
-                    IdentityServer = "https://localhost:5001",
-                    ArticlesService = "https://localhost:5006"
-                });
+
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            switch (env)
+            {
+                case "Docker":
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            ArticlesService = "https://localhost:5007",
+                            IdentityServer = "https://192.168.0.101:5001"
+                        });
+                    break;
+
+                default:
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            ArticlesService = "https://localhost:5007",
+                            IdentityServer = "https://localhost:5001"
+                        });
+                    break;
+            }
+
             ServiceAddressOptions = serviceAddressOptionsMock.Object;
         }
 

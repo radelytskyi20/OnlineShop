@@ -1,0 +1,31 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 5001
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+
+COPY ["src/OnlineShop.Library/OnlineShop.Library.csproj", "OnlineShop.Library/"]
+RUN dotnet restore "OnlineShop.Library/OnlineShop.Library.csproj"
+
+COPY ["src/OnlineShop.IdentityServer/OnlineShop.IdentityServer.csproj", "OnlineShop.IdentityServer/"]
+RUN dotnet restore "OnlineShop.IdentityServer/OnlineShop.IdentityServer.csproj"
+
+COPY . .
+
+WORKDIR "/src/src/OnlineShop.IdentityServer"
+RUN dotnet build "OnlineShop.IdentityServer.csproj" -c Debug -o /app/build -r linux-x64 --self-contained
+
+FROM build AS publish
+RUN dotnet publish "OnlineShop.IdentityServer.csproj" -c Debug -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+ENV ASPNETCORE_URLS="https://+:5001"
+ENV ASPNETCORE_ENVIRONMENT=Docker
+ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password=pass12345
+
+ENTRYPOINT ["/bin/sh", "-c", "update-ca-certificates && dotnet OnlineShop.IdentityServer.dll"]

@@ -30,12 +30,28 @@ namespace OnlineShop.UserManagementService.ApiTests
         public async Task SetUp()
         {
             var serviceAddressOptionsMock = new Mock<IOptions<ServiceAdressOptions>>();
-            serviceAddressOptionsMock.Setup(x => x.Value)
-                .Returns(new ServiceAdressOptions()
-                {
-                    UserManagementService = "https://localhost:5003",
-                    IdentityServer = "https://localhost:5001"
-                });
+
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            switch (env)
+            {
+                case "Docker":
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            UserManagementService = "https://localhost:5003",
+                            IdentityServer = "https://192.168.0.101:5001"
+                        });
+                    break;
+
+                default:
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            UserManagementService = "https://localhost:5003",
+                            IdentityServer = "https://localhost:5001"
+                        });
+                    break;
+            }
 
             _systemUnderTests = new RolesClient(new HttpClient(), serviceAddressOptionsMock.Object);
             _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);

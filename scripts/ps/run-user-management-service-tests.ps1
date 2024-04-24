@@ -1,0 +1,1 @@
+dotnet test --environment ASPNETCORE_ENVIRONMENT="Docker" 'D:\OnlineShop\src\OnlineShop.UserManagementService.ApiTests\OnlineShop.UserManagementService.ApiTests.csproj';

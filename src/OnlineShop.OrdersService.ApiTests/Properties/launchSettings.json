@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OnlineShop.OrdersService.ApiTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
