@@ -31,12 +31,28 @@ namespace OnlineShop.OrdersService.ApiTests
         public async Task Setup()
         {
             var serviceAddressOptionsMock = new Mock<IOptions<ServiceAdressOptions>>();
-            serviceAddressOptionsMock.Setup(x => x.Value)
-                .Returns(new ServiceAdressOptions()
-                {
-                    IdentityServer = "https://localhost:5001",
-                    OrdersService = "https://localhost:5005"
-                });
+
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            switch (env)
+            {
+                case "Docker":
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            OrdersService = "https://localhost:5005",
+                            IdentityServer = "https://192.168.0.101:5001"
+                        });
+                    break;
+
+                default:
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            OrdersService = "https://localhost:5005",
+                            IdentityServer = "https://localhost:5001"
+                        });
+                    break;
+            }
 
             _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
             _systemUnderTest = new OrdersClient(new HttpClient(), serviceAddressOptionsMock.Object);
@@ -66,7 +82,7 @@ namespace OnlineShop.OrdersService.ApiTests
                 .With(ost => ost.OrderStatusId, _fixture.Create<int>() % _maxOrderStatusId + 1) //random value from 1 to 4
                 .Without(ost => ost.OrderStatus)
                 .CreateMany();
-            
+
             expected.OrderStatusTracks = orderStatusTracks.ToList();
 
             var addResponse = await _systemUnderTest.Add(expected);
@@ -102,7 +118,7 @@ namespace OnlineShop.OrdersService.ApiTests
                 .With(o => o.Articles, _fixture.CreateMany<OrderedArticle>().ToList())
                 .Without(o => o.OrderStatusTracks)
                 .Create();
-            
+
             var orderStatusTracks2 = _fixture.Build<OrderStatusTrack>()
                 .With(ost => ost.OrderId, expected1.Id)
                 .With(ost => ost.OrderStatusId, _fixture.Create<int>() % _maxOrderStatusId + 1)

@@ -50,12 +50,19 @@ namespace OnlineShop.Library.Clients.IdentityServer
 
         protected async Task<Token> GetTokenRequest(IEnumerable<KeyValuePair<string, string>> keyValuesContent)
         {
-            var content = new FormUrlEncodedContent(keyValuesContent); //form url encoded content => content to send in http post request
-            var response = await HttpClient.PostAsync("/connect/token", content); //send http post request to identity server => base address + request address (/connect/token is our request address)
-            var responseContent = await response.Content.ReadAsStringAsync(); //get response content from identity server
+            try
+            {
+                var content = new FormUrlEncodedContent(keyValuesContent); //form url encoded content => content to send in http post request
+                var response = await HttpClient.PostAsync("/connect/token", content); //send http post request to identity server => base address + request address (/connect/token is our request address)
+                var responseContent = await response.Content.ReadAsStringAsync(); //get response content from identity server
 
-            var token = JsonConvert.DeserializeObject<Token>(responseContent); //deserialize token from response content and return it
-            return token;
+                var token = JsonConvert.DeserializeObject<Token>(responseContent); //deserialize token from response content and return it
+                return token;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

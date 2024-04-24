@@ -26,14 +26,34 @@ namespace OnlineShop.ApiService.ApiTests
         public async Task Setup()
         {
             var serviceAddressOptionsMock = new Mock<IOptions<ServiceAdressOptions>>();
-            serviceAddressOptionsMock.Setup(x => x.Value).Returns(new ServiceAdressOptions()
+
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            switch (env)
             {
-                OrdersService = "https://localhost:5005",
-                ArticlesService = "https://localhost:5006",
-                UserManagementService = "https://localhost:5003",
-                IdentityServer = "https://localhost:5001",
-                ApiService = "https://localhost:5009"
-            });
+                case "Docker":
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            OrdersService = "https://localhost:5005",
+                            ArticlesService = "https://localhost:5006",
+                            UserManagementService = "https://localhost:5003",
+                            IdentityServer = "https://192.168.0.101:5001",
+                            ApiService = "https://localhost:5009"
+                        });
+                    break;
+
+                default:
+                    serviceAddressOptionsMock.Setup(x => x.Value)
+                        .Returns(new ServiceAdressOptions()
+                        {
+                            OrdersService = "https://localhost:5005",
+                            ArticlesService = "https://localhost:5006",
+                            UserManagementService = "https://localhost:5003",
+                            IdentityServer = "https://localhost:5001",
+                            ApiService = "https://localhost:5009"
+                        });
+                    break;
+            }
 
             SystemUnderTests = new HttpClient() { BaseAddress = new Uri(serviceAddressOptionsMock.Object.Value.ApiService) };
             IdentityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
