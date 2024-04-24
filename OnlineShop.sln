@@ -224,6 +224,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{FFF14D
 		UserManagementService_Dockerfile_Debug = UserManagementService_Dockerfile_Debug
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ps", "ps", "{DB934930-715C-489D-B61D-96671EC9C2B1}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\ps\run-api-service-tests.ps1 = scripts\ps\run-api-service-tests.ps1
+		scripts\ps\run-articles-service-tests.ps1 = scripts\ps\run-articles-service-tests.ps1
+		scripts\ps\run-orders-service-tests.ps1 = scripts\ps\run-orders-service-tests.ps1
+		scripts\ps\run-user-management-service-tests.ps1 = scripts\ps\run-user-management-service-tests.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,6 +319,7 @@ Global
 		{4BA0CADC-37FA-448B-A3C5-20E77496DA2D} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
 		{91CCF44C-C910-49E2-89D6-8B0273239D90} = {4ACD9AAE-1EA6-4587-B8E8-C305C04461A9}
 		{8CF78993-199A-49C1-9B7B-BA0C6A47E348} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
+		{DB934930-715C-489D-B61D-96671EC9C2B1} = {23374A74-B464-4D25-A0A3-586D8AD51381}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}
