@@ -402,3 +402,6 @@ FodyWeavers.xsd
 *.crt
 *.key
 *.csr
+
+# Folder with logs
+.temp/

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using OnlineShop.Library.Constants;
+using OnlineShop.Library.Logging;
 using OnlineShop.Library.UserManagementService.Models;
 using OnlineShop.Library.UserManagementService.Requests;
 
@@ -14,118 +16,479 @@ namespace OnlineShop.UserManagementService.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(UserManager<ApplicationUser> userManager)
+        public UsersController(UserManager<ApplicationUser> userManager, ILogger<UsersController> logger)
         {
             _userManager = userManager;
+            _logger = logger;
         }
 
         [HttpPost(RepoActions.Add)]
-        public async Task<IdentityResult> Add(CreateUserRequest request)
+        public async Task<IActionResult> Add(CreateUserRequest request)
         {
-            var result = await _userManager.CreateAsync(request.User, request.Password);
-            return result;
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Add))
+                    .WithComment("Adding new user")
+                    .WithOperation(RepoActions.Add)
+                    .WithParametres($"{nameof(request.User.Id)}: {request.User.Id}")
+                    .ToString()
+                    );
+
+                var result = await _userManager.CreateAsync(request.User, request.Password);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Add))
+                    .WithComment(ex.ToString())
+                    .WithOperation(RepoActions.Add)
+                    .WithParametres($"{nameof(request.User.Id)}: {request.User.Id}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(RepoActions.Update)]
-        public async Task<IdentityResult> Update(ApplicationUser user)
+        public async Task<IActionResult> Update(ApplicationUser user)
         {
-            var userToBeUpdated = await _userManager.FindByNameAsync(user.UserName);
-            if (userToBeUpdated == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user.UserName} was not found." });
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Update))
+                    .WithComment("Updating user")
+                    .WithOperation(RepoActions.Update)
+                    .WithParametres($"{nameof(user.Id)}: {user.Id}")
+                    .ToString()
+                    );
 
-            userToBeUpdated.DefaultAddress = user.DefaultAddress;
-            userToBeUpdated.DeliveryAddress = user.DeliveryAddress;
-            userToBeUpdated.FirstName = user.FirstName;
-            userToBeUpdated.LastName = user.LastName;
-            userToBeUpdated.PhoneNumber = user.PhoneNumber;
-            userToBeUpdated.Email = user.Email;
+                var userToBeUpdated = await _userManager.FindByNameAsync(user.UserName);
+                if (userToBeUpdated == null)
+                {
+                    var description = $"User {user.UserName} was not found.";
 
-            var result = await _userManager.UpdateAsync(userToBeUpdated);
-            return result;
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(Update))
+                        .WithComment(description)
+                        .WithOperation(RepoActions.Update)
+                        .WithParametres($"{nameof(user.Id)}: {user.Id}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                userToBeUpdated.DefaultAddress = user.DefaultAddress;
+                userToBeUpdated.DeliveryAddress = user.DeliveryAddress;
+                userToBeUpdated.FirstName = user.FirstName;
+                userToBeUpdated.LastName = user.LastName;
+                userToBeUpdated.PhoneNumber = user.PhoneNumber;
+                userToBeUpdated.Email = user.Email;
+
+                var result = await _userManager.UpdateAsync(userToBeUpdated);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Update))
+                    .WithComment(ex.ToString())
+                    .WithOperation(RepoActions.Update)
+                    .WithParametres($"{nameof(user.Id)}: {user.Id}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(RepoActions.Remove)]
-        public async Task<IdentityResult> Remove(ApplicationUser user)
+        public async Task<IActionResult> Remove(ApplicationUser user)
         {
-            var result = await _userManager.DeleteAsync(user);
-            return result;
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Remove))
+                    .WithComment("Removing user")
+                    .WithOperation(RepoActions.Remove)
+                    .WithParametres($"{nameof(user.Id)}: {user.Id}")
+                    .ToString()
+                    );
+
+                var userToBeRemoved = await _userManager.FindByNameAsync(user.UserName);
+                if (userToBeRemoved == null)
+                {
+                    var description = $"User {user.UserName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(Remove))
+                        .WithComment(description)
+                        .WithOperation(RepoActions.Remove)
+                        .WithParametres($"{nameof(user.Id)}: {user.Id}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                var result = await _userManager.DeleteAsync(user);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Remove))
+                    .WithComment(ex.ToString())
+                    .WithOperation(RepoActions.Remove)
+                    .WithParametres($"User id: {user.Id}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpGet]
-        public async Task<ApplicationUser?> Get(string userName)
+        public async Task<IActionResult> Get(string userName)
         {
-            var result = await _userManager.Users
-                .Include(u => u.DefaultAddress)
-                .Include(u => u.DeliveryAddress)
-                .FirstOrDefaultAsync(u => u.UserName == userName); //improve in the future
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Get))
+                    .WithComment("Getting user")
+                    .WithParametres($"{nameof(userName)}: {userName}")
+                    .ToString()
+                    );
 
-            return result;
+                var result = await _userManager.Users
+                    .Include(u => u.DefaultAddress)
+                    .Include(u => u.DeliveryAddress)
+                    .FirstOrDefaultAsync(u => u.UserName == userName);
+
+                if (result == null)
+                {
+                    var description = $"User {userName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(Get))
+                        .WithComment(description)
+                        .WithParametres($"{nameof(userName)}: {userName}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Get))
+                    .WithComment(ex.ToString())
+                    .WithParametres($"{nameof(userName)}: {userName}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpGet(RepoActions.GetAll)]
-        public IEnumerable<ApplicationUser> Get()
+        public IActionResult Get()
         {
-            var result = _userManager.Users
-                .Include(u => u.DefaultAddress)
-                .Include(u => u.DeliveryAddress)
-                .AsEnumerable();
-            return result;
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Get))
+                    .WithComment("Getting all users")
+                    .WithOperation(RepoActions.GetAll)
+                    .WithParametres(LoggingConstants.NoParameters)
+                    .ToString()
+                    );
+
+                var result = _userManager.Users
+                    .Include(u => u.DefaultAddress)
+                    .Include(u => u.DeliveryAddress)
+                    .AsEnumerable();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(Get))
+                    .WithComment(ex.ToString())
+                    .WithOperation(RepoActions.GetAll)
+                    .WithParametres(LoggingConstants.NoParameters)
+                    .ToString()
+                    );
+                
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(UsersControllerRoutes.ChangePassword)]
-        public async Task<IdentityResult> ChangePassword(UserPasswordChangeRequest request)
+        public async Task<IActionResult> ChangePassword(UserPasswordChangeRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(ChangePassword))
+                    .WithComment("Changing password")
+                    .WithOperation(UsersControllerRoutes.ChangePassword)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
 
-            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
-            return result;
+                var user = await _userManager.FindByNameAsync(request.UserName);
+                if (user == null)
+                {
+                    var description = $"User {request.UserName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(ChangePassword))
+                        .WithComment(description)
+                        .WithOperation(UsersControllerRoutes.ChangePassword)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(ChangePassword))
+                    .WithComment(ex.ToString())
+                    .WithOperation(UsersControllerRoutes.ChangePassword)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(UsersControllerRoutes.AddToRole)]
-        public async Task<IdentityResult> AddToRole(AddRemoveRoleRequest request)
+        public async Task<IActionResult> AddToRole(AddRemoveRoleRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(AddToRole))
+                    .WithComment("Adding to role")
+                    .WithOperation(UsersControllerRoutes.AddToRole)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
 
-            var result = await _userManager.AddToRoleAsync(user, request.RoleName);
-            return result;
+                var user = await _userManager.FindByNameAsync(request.UserName);
+                if (user == null)
+                {
+                    var description = $"User {user?.UserName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(AddToRole))
+                        .WithComment(description)
+                        .WithOperation(UsersControllerRoutes.AddToRole)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                var result = await _userManager.AddToRoleAsync(user, request.RoleName);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(AddToRole))
+                    .WithComment(ex.ToString())
+                    .WithOperation(UsersControllerRoutes.AddToRole)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(UsersControllerRoutes.AddToRoles)]
-        public async Task<IdentityResult> AddToRoles(AddRemoveRolesRequest request)
+        public async Task<IActionResult> AddToRoles(AddRemoveRolesRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(AddToRoles))
+                    .WithComment("Adding to roles")
+                    .WithOperation(UsersControllerRoutes.AddToRoles)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
 
-            var result = await _userManager.AddToRolesAsync(user, request.RoleNames);
-            return result;
+                var user = await _userManager.FindByNameAsync(request.UserName);
+                if (user == null)
+                {
+                    var description = $"User {user?.UserName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(AddToRoles))
+                        .WithComment(description)
+                        .WithOperation(UsersControllerRoutes.AddToRoles)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                var result = await _userManager.AddToRolesAsync(user, request.RoleNames);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(AddToRoles))
+                    .WithComment(ex.ToString())
+                    .WithOperation(UsersControllerRoutes.AddToRoles)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(UsersControllerRoutes.RemoveFromRole)]
-        public async Task<IdentityResult> RemoveFromRole(AddRemoveRoleRequest request)
+        public async Task<IActionResult> RemoveFromRole(AddRemoveRoleRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(RemoveFromRole))
+                    .WithComment("Removing from role")
+                    .WithOperation(UsersControllerRoutes.RemoveFromRole)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
 
-            var result = await _userManager.RemoveFromRoleAsync(user, request.RoleName);
-            return result;
+                var user = await _userManager.FindByNameAsync(request.UserName);
+                if (user == null)
+                {
+                    var description = $"User {user?.UserName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(RemoveFromRole))
+                        .WithComment(description)
+                        .WithOperation(UsersControllerRoutes.RemoveFromRole)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                var result = await _userManager.RemoveFromRoleAsync(user, request.RoleName);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(RemoveFromRole))
+                        .WithComment(ex.ToString())
+                        .WithOperation(UsersControllerRoutes.RemoveFromRole)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
 
         [HttpPost(UsersControllerRoutes.RemoveFromRoles)]
-        public async Task<IdentityResult> RemoveFromRoles(AddRemoveRolesRequest request)
+        public async Task<IActionResult> RemoveFromRoles(AddRemoveRolesRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null)
-                return IdentityResult.Failed(new IdentityError() { Description = $"User {user?.UserName} was not found." });
+            try
+            {
+                _logger.LogInformation(new LogEntry()
+                    .WithClass(nameof(UsersController))
+                    .WithMethod(nameof(RemoveFromRoles))
+                    .WithComment("Removing from roles")
+                    .WithOperation(UsersControllerRoutes.RemoveFromRoles)
+                    .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                    .ToString()
+                    );
 
-            var result = await _userManager.RemoveFromRolesAsync(user, request.RoleNames);
-            return result;
+                var user = await _userManager.FindByNameAsync(request.UserName);
+                if (user == null)
+                {
+                    var description = $"User {user?.UserName} was not found.";
+
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(RemoveFromRoles))
+                        .WithComment(description)
+                        .WithOperation(UsersControllerRoutes.RemoveFromRoles)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
+                }
+
+                var result = await _userManager.RemoveFromRolesAsync(user, request.RoleNames);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(RemoveFromRoles))
+                        .WithComment(ex.ToString())
+                        .WithOperation(UsersControllerRoutes.RemoveFromRoles)
+                        .WithParametres($"{nameof(request.UserName)}: {request.UserName}")
+                        .ToString()
+                        );
+
+                return StatusCode(500, LoggingConstants.InternalServerErrorMessage);
+            }
         }
     }
 }

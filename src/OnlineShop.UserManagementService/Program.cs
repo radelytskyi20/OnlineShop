@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog.Web;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
 using OnlineShop.Library.Options;
@@ -49,6 +50,10 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("scope", IdConstants.ApiScope);
     });
 });
+
+// NLog: Setup NLog for Dependency injection
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
 var app = builder.Build();
 
