@@ -11,7 +11,8 @@ namespace OnlineShop.ArticlesService.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class PriceListsController : RepoControllerBase<PriceList>
     {
-        public PriceListsController(IRepo<PriceList> priceListsRepo) : base(priceListsRepo) { }
+        public PriceListsController(IRepo<PriceList> priceListsRepo, ILogger<PriceListsController> logger) 
+            : base(priceListsRepo, logger) { }
 
         protected override void UpdateProperties(PriceList source, PriceList destination)
         {
