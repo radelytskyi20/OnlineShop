@@ -11,7 +11,8 @@ namespace OnlineShop.OrdersService.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrderedArticlesController : RepoControllerBase<OrderedArticle>
     {
-        public OrderedArticlesController(IRepo<OrderedArticle> entitiesRepo) : base(entitiesRepo) { }
+        public OrderedArticlesController(IRepo<OrderedArticle> entitiesRepo, ILogger<OrderedArticlesController> logger) 
+            : base(entitiesRepo, logger) { }
 
         protected override void UpdateProperties(OrderedArticle source, OrderedArticle destination)
         {

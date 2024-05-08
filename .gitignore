@@ -404,4 +404,4 @@ FodyWeavers.xsd
 *.csr
 
 # Folder with logs
-.temp/
+/temp
