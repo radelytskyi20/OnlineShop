@@ -24,10 +24,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENV ASPNETCORE_URLS="https://+:5007;http://+:5006"
-ENV ASPNETCORE_ENVIRONMENT=Docker
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password=pass12345
-
-ENTRYPOINT ["/bin/sh", "-c", "update-ca-certificates && dotnet OnlineShop.ArticlesService.dll"]
+ENTRYPOINT ["dotnet", "OnlineShop.ArticlesService.dll"]
 
