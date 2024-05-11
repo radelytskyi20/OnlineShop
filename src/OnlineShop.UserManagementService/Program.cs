@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
+using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
 using OnlineShop.Library.Options;
@@ -26,7 +27,11 @@ builder.Services.AddDbContext<UsersDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString(ConnectionNames.UserConnection));
 });
-    
+
+builder.Services.AddHttpClient<IdentityServerClient>();
+builder.Services.AddTransient<IIdentityServerClient, IdentityServerClient>();
+builder.Services.Configure<ServiceAdressOptions>(builder.Configuration.GetSection(ServiceAdressOptions.SectionName));
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
