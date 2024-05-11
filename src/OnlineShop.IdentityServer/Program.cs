@@ -19,7 +19,12 @@ namespace OnlineShop.IdentityServer
     {
         public static int Main(string[] args)
         {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var isDocker = environment == EnvironmentNames.Docker;
+            LogManager.Setup().LoadConfigurationFromFile(isDocker ? "nlog.Docker.config" : "nlog.config");
+            
             var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            logger.Info($"Is docker environment: {isDocker}; Environment name: {environment}.");
 
             try
             {

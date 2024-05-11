@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog;
 using NLog.Web;
 using OnlineShop.Library.ArticlesService.Models;
 using OnlineShop.Library.Common.Interfaces;
@@ -65,6 +66,13 @@ builder.Services.AddDbContext<UsersDbContext>(options =>
 });
 
 // NLog: Setup NLog for Dependency injection
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var isDocker = environment == EnvironmentNames.Docker;
+LogManager.Setup().LoadConfigurationFromFile(isDocker ? "nlog.Docker.config" : "nlog.config");
+
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger.Info($"Is docker environment: {isDocker}; Environment name: {environment}.");
+
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
 
