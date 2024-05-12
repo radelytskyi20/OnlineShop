@@ -11,7 +11,8 @@ namespace OnlineShop.OrdersService.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class OrderStatusTracksController : RepoControllerBase<OrderStatusTrack>
     {
-        public OrderStatusTracksController(IRepo<OrderStatusTrack> entitiesRepo) : base(entitiesRepo) { }
+        public OrderStatusTracksController(IRepo<OrderStatusTrack> entitiesRepo, ILogger<OrderStatusTracksController> logger) 
+            : base(entitiesRepo, logger) { }
 
         protected override void UpdateProperties(OrderStatusTrack source, OrderStatusTrack destination)
         {

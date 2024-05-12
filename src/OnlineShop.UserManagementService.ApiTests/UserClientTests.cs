@@ -3,7 +3,6 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Moq;
-using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Common.Models;
 using OnlineShop.Library.Options;
@@ -17,7 +16,7 @@ namespace OnlineShop.UserManagementService.ApiTests
     public class UserClientTests
     {
         private RolesClient _rolesClient;
-        private IIdentityServerClient _identityServerClient;
+        private ILoginClient _loginClient;
         private UsersClient _systemUnderTests;
 
         #region Test Data
@@ -73,8 +72,7 @@ namespace OnlineShop.UserManagementService.ApiTests
                     serviceAddressOptionsMock.Setup(x => x.Value)
                         .Returns(new ServiceAdressOptions()
                         {
-                            UserManagementService = "https://localhost:5003",
-                            IdentityServer = "https://192.168.0.101:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
 
@@ -82,15 +80,14 @@ namespace OnlineShop.UserManagementService.ApiTests
                     serviceAddressOptionsMock.Setup(x => x.Value)
                         .Returns(new ServiceAdressOptions()
                         {
-                            UserManagementService = "https://localhost:5003",
-                            IdentityServer = "https://localhost:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
             }
 
             _systemUnderTests = new UsersClient(new HttpClient(), serviceAddressOptionsMock.Object);
             _rolesClient = new RolesClient(new HttpClient(), serviceAddressOptionsMock.Object);
-            _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
+            _loginClient = new LoginClient(new HttpClient(), serviceAddressOptionsMock.Object);
 
             var identityServerApiOptions = new IdentityServerApiOptions()
             {
@@ -100,7 +97,7 @@ namespace OnlineShop.UserManagementService.ApiTests
                 GrantType = "client_credentials"
             };
 
-            var token = await _identityServerClient.GetApiToken(identityServerApiOptions);
+            var token = await _loginClient.GetApiTokenByClientSeceret(identityServerApiOptions);
             _systemUnderTests.HttpClient.SetBearerToken(token.AccessToken);
             _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
         }
@@ -141,7 +138,7 @@ namespace OnlineShop.UserManagementService.ApiTests
                     .Without(a => a.Id)
                     .With(a => a.PostalCode, _fixture.Create<string>()[..32])
                     .Create(),
-                
+
                 DeliveryAddress = _fixture.Build<Address>()
                     .Without(a => a.Id)
                     .With(a => a.PostalCode, _fixture.Create<string>()[..32])
@@ -194,7 +191,7 @@ namespace OnlineShop.UserManagementService.ApiTests
 
             getResponse = await _systemUnderTests.Get(userBeforeRemove.UserName);
             Assert.That(getResponse.Code, Is.EqualTo(HttpStatusCode.NoContent.ToString()));
-            
+
             var userAfterRemove = getResponse.Payload;
             Assert.That(userAfterRemove, Is.Null);
         }
@@ -275,7 +272,7 @@ namespace OnlineShop.UserManagementService.ApiTests
                         .With(a => a.PostalCode, _fixture.Create<string>()[..32])
                         .Create()
             };
-            var password = _testUserPassword; 
+            var password = _testUserPassword;
             var expectedUsers = new List<ApplicationUser>() { user1, user2 };
 
             //Act & Assert
@@ -352,7 +349,7 @@ namespace OnlineShop.UserManagementService.ApiTests
             var userAfterAddRoles = getUserResponse.Payload;
 
             await RemoveUserAndAssert(userAfterAddRoles);
-            
+
             foreach (var roleToRemove in rolesToAdd)
                 await RemoveRoleAndAssert(roleToRemove);
         }

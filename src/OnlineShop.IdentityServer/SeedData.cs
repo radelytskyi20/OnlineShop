@@ -9,9 +9,10 @@ using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 using OnlineShop.Library.UserManagementService.Models;
 using OnlineShop.Library.Data;
+using NLog;
+using NLog.Web;
 
 namespace OnlineShop.IdentityServer
 {
@@ -19,6 +20,8 @@ namespace OnlineShop.IdentityServer
     {
         public static void EnsureSeedData(string connectionString)
         {
+            var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            
             var services = new ServiceCollection();
             services.AddLogging();
             services.AddDbContext<UsersDbContext>(options =>
@@ -33,6 +36,7 @@ namespace OnlineShop.IdentityServer
                 using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     var context = scope.ServiceProvider.GetService<UsersDbContext>();
+                    context.Database.EnsureDeleted();
                     context.Database.Migrate();
 
                     var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -80,11 +84,11 @@ namespace OnlineShop.IdentityServer
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug("Yaroslav has been created");
+                        logger.Info("Yaroslav has been created");
                     }
                     else
                     {
-                        Log.Debug("Yaroslav already exists");
+                        logger.Warn("Yaroslav already exists");
 
                         if (yaroslav.DefaultAddress == null)
                         {
@@ -114,7 +118,7 @@ namespace OnlineShop.IdentityServer
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
-                        Log.Debug("Yaroslav has been updated");
+                        logger.Info("Yaroslav has been updated");
                     }
                 }
             }

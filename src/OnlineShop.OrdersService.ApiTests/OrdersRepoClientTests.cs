@@ -3,8 +3,8 @@ using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Moq;
 using OnlineShop.Library.ArticlesService.Models;
-using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Clients.OrdersService;
+using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Options;
 using OnlineShop.Library.OrdersService.Models;
 
@@ -13,7 +13,7 @@ namespace OnlineShop.OrdersService.ApiTests
     public class OrdersRepoClientTests
     {
         private readonly Fixture _fixture = new();
-        private IdentityServerClient _identityServerClient;
+        private ILoginClient _loginClient;
         private OrdersClient _systemUnderTest;
 
         //max id value from OrderStatuses table; see OrdersDbContext.cs, OnModelCreating method
@@ -40,7 +40,7 @@ namespace OnlineShop.OrdersService.ApiTests
                         .Returns(new ServiceAdressOptions()
                         {
                             OrdersService = "https://localhost:5005",
-                            IdentityServer = "https://192.168.0.101:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
 
@@ -49,12 +49,12 @@ namespace OnlineShop.OrdersService.ApiTests
                         .Returns(new ServiceAdressOptions()
                         {
                             OrdersService = "https://localhost:5005",
-                            IdentityServer = "https://localhost:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
             }
 
-            _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
+            _loginClient = new LoginClient(new HttpClient(), serviceAddressOptionsMock.Object);
             _systemUnderTest = new OrdersClient(new HttpClient(), serviceAddressOptionsMock.Object);
 
             var identityServerApiOptions = new IdentityServerApiOptions()
@@ -65,7 +65,7 @@ namespace OnlineShop.OrdersService.ApiTests
                 GrantType = "client_credentials"
             };
 
-            var token = await _identityServerClient.GetApiToken(identityServerApiOptions);
+            var token = await _loginClient.GetApiTokenByClientSeceret(identityServerApiOptions);
             _systemUnderTest.HttpClient.SetBearerToken(token.AccessToken);
         }
 

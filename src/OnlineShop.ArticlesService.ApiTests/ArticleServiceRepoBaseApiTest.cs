@@ -3,11 +3,9 @@ using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Moq;
 using OnlineShop.Library.Clients;
-using OnlineShop.Library.Clients.IdentityServer;
+using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Common.Interfaces;
 using OnlineShop.Library.Options;
-using System.Diagnostics.CodeAnalysis;
-using System.Net.Http.Headers;
 
 namespace OnlineShop.ArticlesService.ApiTests
 {
@@ -18,7 +16,7 @@ namespace OnlineShop.ArticlesService.ApiTests
         protected readonly Fixture Fixture = new();
         protected IOptions<ServiceAdressOptions> ServiceAddressOptions;
         protected IdentityServerApiOptions IdentityServerApiOptions;
-        protected IdentityServerClient IdentityServerClient;
+        protected ILoginClient LoginClient;
         protected TClient SystemUnderTest = default!;
 
         public ArticleServiceRepoBaseApiTest()
@@ -40,7 +38,7 @@ namespace OnlineShop.ArticlesService.ApiTests
             SetServiceAddressOptions();
             SetIdentityServerApiOptions();
 
-            IdentityServerClient = new IdentityServerClient(new HttpClient(), ServiceAddressOptions);
+            LoginClient = new LoginClient(new HttpClient(), ServiceAddressOptions);
 
             CreateSystemUnderTest();
             await AuthorizeSystemUnderTests();
@@ -58,7 +56,7 @@ namespace OnlineShop.ArticlesService.ApiTests
                         .Returns(new ServiceAdressOptions()
                         {
                             ArticlesService = "https://localhost:5007",
-                            IdentityServer = "https://192.168.0.101:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
 
@@ -67,7 +65,7 @@ namespace OnlineShop.ArticlesService.ApiTests
                         .Returns(new ServiceAdressOptions()
                         {
                             ArticlesService = "https://localhost:5007",
-                            IdentityServer = "https://localhost:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
             }
@@ -88,7 +86,7 @@ namespace OnlineShop.ArticlesService.ApiTests
 
         protected virtual async Task AuthorizeSystemUnderTests()
         {
-            var token = await IdentityServerClient.GetApiToken(IdentityServerApiOptions);
+            var token = await LoginClient.GetApiTokenByClientSeceret(IdentityServerApiOptions);
             SystemUnderTest.HttpClient.SetBearerToken(token.AccessToken);
         }
 

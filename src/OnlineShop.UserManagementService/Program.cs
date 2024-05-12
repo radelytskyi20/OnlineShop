@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog;
+using NLog.Web;
+using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Data;
 using OnlineShop.Library.Options;
@@ -25,7 +28,11 @@ builder.Services.AddDbContext<UsersDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString(ConnectionNames.UserConnection));
 });
-    
+
+builder.Services.AddHttpClient<IdentityServerClient>();
+builder.Services.AddTransient<IIdentityServerClient, IdentityServerClient>();
+builder.Services.Configure<ServiceAdressOptions>(builder.Configuration.GetSection(ServiceAdressOptions.SectionName));
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<UsersDbContext>()
     .AddDefaultTokenProviders();
@@ -49,6 +56,17 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("scope", IdConstants.ApiScope);
     });
 });
+
+// NLog: Setup NLog for Dependency injection
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var isDocker = environment == EnvironmentNames.Docker;
+LogManager.Setup().LoadConfigurationFromFile(isDocker ? "nlog.Docker.config" : "nlog.config");
+
+var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger.Info($"Is docker environment: {isDocker}; Environment name: {environment}.");
+
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
 var app = builder.Build();
 

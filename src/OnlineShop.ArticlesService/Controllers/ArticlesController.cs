@@ -11,7 +11,8 @@ namespace OnlineShop.ArticlesService.Controllers
     [Authorize(AuthenticationSchemes = "Bearer")]
     public class ArticlesController : RepoControllerBase<Article>
     {
-        public ArticlesController(IRepo<Article> articlesRepo) : base (articlesRepo) { }
+        public ArticlesController(IRepo<Article> articlesRepo, ILogger<ArticlesController> logger) 
+            : base (articlesRepo, logger) { }
 
         protected override void UpdateProperties(Article source, Article destination)
         {
