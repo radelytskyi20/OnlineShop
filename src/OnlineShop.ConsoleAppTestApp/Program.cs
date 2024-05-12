@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Options;
 
@@ -16,7 +15,9 @@ namespace OnlineShop.ConsoleAppTestApp
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddTransient<AuthenticationServiceTest>();
-                    services.AddHttpClient<IdentityServerClient>();
+                    services.AddTransient<ILoginClient, LoginClient>();
+
+                    services.AddHttpClient<LoginClient>();
                     services.AddHttpClient<UsersClient>();
                     services.AddHttpClient<RolesClient>();
 

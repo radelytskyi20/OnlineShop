@@ -3,7 +3,6 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Moq;
-using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Options;
 using OnlineShop.Library.UserManagementService.Responses;
@@ -14,7 +13,7 @@ namespace OnlineShop.UserManagementService.ApiTests
     public class RolesClientTests
     {
         private RolesClient _systemUnderTests;
-        private IIdentityServerClient _identityServerClient;
+        private ILoginClient _loginClient;
 
         #region Test Data
 
@@ -38,8 +37,7 @@ namespace OnlineShop.UserManagementService.ApiTests
                     serviceAddressOptionsMock.Setup(x => x.Value)
                         .Returns(new ServiceAdressOptions()
                         {
-                            UserManagementService = "https://localhost:5003",
-                            IdentityServer = "https://192.168.0.101:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
 
@@ -47,14 +45,13 @@ namespace OnlineShop.UserManagementService.ApiTests
                     serviceAddressOptionsMock.Setup(x => x.Value)
                         .Returns(new ServiceAdressOptions()
                         {
-                            UserManagementService = "https://localhost:5003",
-                            IdentityServer = "https://localhost:5001"
+                            UserManagementService = "https://localhost:5003"
                         });
                     break;
             }
 
             _systemUnderTests = new RolesClient(new HttpClient(), serviceAddressOptionsMock.Object);
-            _identityServerClient = new IdentityServerClient(new HttpClient(), serviceAddressOptionsMock.Object);
+            _loginClient = new LoginClient(new HttpClient(), serviceAddressOptionsMock.Object);
 
             var identityServerApiOptions = new IdentityServerApiOptions()
             {
@@ -64,7 +61,7 @@ namespace OnlineShop.UserManagementService.ApiTests
                 GrantType = "client_credentials"
             };
 
-            var token = await _identityServerClient.GetApiToken(identityServerApiOptions);
+            var token = await _loginClient.GetApiTokenByClientSeceret(identityServerApiOptions);
             _systemUnderTests.HttpClient.SetBearerToken(token.AccessToken);
         }
 
@@ -148,7 +145,7 @@ namespace OnlineShop.UserManagementService.ApiTests
 
             getRoleResponse = await _systemUnderTests.Get(roleBeforeRemove.Name);
             Assert.That(getRoleResponse.Code, Is.EqualTo(HttpStatusCode.NoContent.ToString()));
-            
+
             var roleAfterRemove = getRoleResponse.Payload;
             Assert.That(roleAfterRemove, Is.Null);
         }
@@ -168,7 +165,7 @@ namespace OnlineShop.UserManagementService.ApiTests
             var roleBeforeUpdate = getRoleResponse.Payload;
 
             roleBeforeUpdate.Name = expected.Name;
-            
+
             var updateRoleResponse = await _systemUnderTests.Update(roleBeforeUpdate);
             Assert.That(updateRoleResponse.Succeeded, Is.True);
 

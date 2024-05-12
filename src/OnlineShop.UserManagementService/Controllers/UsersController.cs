@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Logging;
 using OnlineShop.Library.UserManagementService.Models;
@@ -143,7 +142,7 @@ namespace OnlineShop.UserManagementService.Controllers
                     return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
                 }
 
-                var result = await _userManager.DeleteAsync(user);
+                var result = await _userManager.DeleteAsync(userToBeRemoved);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -178,21 +177,6 @@ namespace OnlineShop.UserManagementService.Controllers
                     .Include(u => u.DefaultAddress)
                     .Include(u => u.DeliveryAddress)
                     .FirstOrDefaultAsync(u => u.UserName == userName);
-
-                if (result == null)
-                {
-                    var description = $"User {userName} was not found.";
-
-                    _logger.LogWarning(new LogEntry()
-                        .WithClass(nameof(UsersController))
-                        .WithMethod(nameof(Get))
-                        .WithComment(description)
-                        .WithParametres($"{nameof(userName)}: {userName}")
-                        .ToString()
-                        );
-
-                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
-                }
 
                 return Ok(result);
             }

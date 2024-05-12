@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Library.Constants;
 using OnlineShop.Library.Logging;
 using System.Data;
-using System.Xml.Linq;
 
 namespace OnlineShop.UserManagementService.Controllers
 {
@@ -118,7 +117,7 @@ namespace OnlineShop.UserManagementService.Controllers
                     .ToString()
                     );
 
-                var roleToBeRemoved = _roleManager.FindByNameAsync(role.Name);
+                var roleToBeRemoved = await _roleManager.FindByNameAsync(role.Name);
                 if (roleToBeRemoved == null)
                 {
                     var description = $"Role {role.Name} was not found.";
@@ -135,7 +134,7 @@ namespace OnlineShop.UserManagementService.Controllers
                     return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
                 }
 
-                var result = await _roleManager.DeleteAsync(role);
+                var result = await _roleManager.DeleteAsync(roleToBeRemoved);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -167,22 +166,6 @@ namespace OnlineShop.UserManagementService.Controllers
                     );
 
                 var result = await _roleManager.FindByNameAsync(name);
-                if (result == null)
-                {
-                    var description = $"Role {name} was not found.";
-
-                    _logger.LogWarning(new LogEntry()
-                        .WithClass(nameof(RolesController))
-                        .WithMethod(nameof(Remove))
-                        .WithComment(description)
-                        .WithOperation(RepoActions.Remove)
-                        .WithParametres($"{nameof(name)}: {name}")
-                        .ToString()
-                        );
-
-                    return BadRequest(IdentityResult.Failed(new IdentityError() { Description = description }));
-                }
-                
                 return Ok(result);
             }
             catch (Exception ex)

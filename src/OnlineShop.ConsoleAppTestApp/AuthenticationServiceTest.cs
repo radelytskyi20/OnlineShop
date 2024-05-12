@@ -1,6 +1,5 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Options;
-using OnlineShop.Library.Clients.IdentityServer;
 using OnlineShop.Library.Clients.UserManagementService;
 using OnlineShop.Library.Options;
 using OnlineShop.Library.UserManagementService.Requests;
@@ -9,19 +8,19 @@ namespace OnlineShop.ConsoleAppTestApp
 {
     public class AuthenticationServiceTest
     {
-        private readonly IdentityServerClient _identityServerClient;
+        private readonly ILoginClient _loginClient;
         private readonly UsersClient _usersClient;
         private readonly RolesClient _rolesClient;
         private readonly IdentityServerApiOptions _identityServerOptions;
 
         public AuthenticationServiceTest(
-            IdentityServerClient identityServerClient,
+            ILoginClient loginClient,
             UsersClient usersClient,
             RolesClient rolesClient,
             IOptions<IdentityServerApiOptions> options
             )
         {
-            _identityServerClient = identityServerClient;
+            _loginClient = loginClient;
             _usersClient = usersClient;
             _rolesClient = rolesClient;
             _identityServerOptions = options.Value;
@@ -32,7 +31,7 @@ namespace OnlineShop.ConsoleAppTestApp
 
         public async Task<string> RunUsersClientTests(string[] args)
         {
-            var token = await _identityServerClient.GetApiToken(_identityServerOptions);
+            var token = await _loginClient.GetApiTokenByClientSeceret(_identityServerOptions);
             _usersClient.HttpClient.SetBearerToken(token.AccessToken);
 
             var addResult = await _usersClient.Add(new CreateUserRequest() 
@@ -120,7 +119,7 @@ namespace OnlineShop.ConsoleAppTestApp
 
         public async Task<string> RunRolesClientTests(string[] args)
         {
-            var token = await _identityServerClient.GetApiToken(_identityServerOptions);
+            var token = await _loginClient.GetApiTokenByClientSeceret(_identityServerOptions);
             _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
 
             foreach (var roleName in testRoleNames)
@@ -154,7 +153,7 @@ namespace OnlineShop.ConsoleAppTestApp
 
         public async Task<string> RunClearTmpDataTests(string[] args)
         {
-            var token = await _identityServerClient.GetApiToken(_identityServerOptions);
+            var token = await _loginClient.GetApiTokenByClientSeceret(_identityServerOptions);
             _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
             _rolesClient.HttpClient.SetBearerToken(token.AccessToken);
 
