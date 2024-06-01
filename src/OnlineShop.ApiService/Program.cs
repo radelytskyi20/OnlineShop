@@ -68,6 +68,16 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder.WithOrigins("http://localhost:5010", "https://localhost:5011")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -85,7 +95,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers().RequireAuthorization("WebScope");

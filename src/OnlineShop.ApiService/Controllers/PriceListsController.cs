@@ -30,6 +30,7 @@ namespace OnlineShop.ApiService.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetOne([FromQuery] Guid id)
         {
             var response = await Client.GetOne(id);
@@ -37,6 +38,7 @@ namespace OnlineShop.ApiService.Controllers
         }
 
         [HttpGet(RepoActions.GetAll)]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var response = await Client.GetAll();

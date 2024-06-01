@@ -178,6 +178,20 @@ namespace OnlineShop.UserManagementService.Controllers
                     .Include(u => u.DeliveryAddress)
                     .FirstOrDefaultAsync(u => u.UserName == userName);
 
+                if (result == null)
+                {
+                    _logger.LogWarning(new LogEntry()
+                        .WithClass(nameof(UsersController))
+                        .WithMethod(nameof(Get))
+                        .WithComment($"User with username {userName} was not found.")
+                        .WithOperation("Get one")
+                        .WithParametres(userName)
+                        .ToString()
+                        );
+
+                    return NotFound($"User with username {userName} was not found.");
+                }
+
                 return Ok(result);
             }
             catch (Exception ex)
