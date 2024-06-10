@@ -235,7 +235,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ps", "ps", "{DB934930-715C-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{BC7D780E-45BE-4DA6-BB03-B7C26F881D47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Ui", "src\OnlineShop.Ui\OnlineShop.Ui.csproj", "{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Ui", "src\OnlineShop.Ui\OnlineShop.Ui.csproj", "{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

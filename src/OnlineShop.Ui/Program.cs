@@ -1,9 +1,14 @@
-using OnlineShop.Ui.Components;
+using OnlineShop.Ui;
+using OnlineShop.Ui.Abstractions;
+using OnlineShop.Ui.Abstractions.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
+
+builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new("https://localhost:5009") }); //all requests to backend will send to api service
+builder.Services.AddTransient<IArticlesProvider, ArticlesProvider>();
 
 var app = builder.Build();
 

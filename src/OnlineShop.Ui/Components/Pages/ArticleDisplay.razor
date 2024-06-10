@@ -1,0 +1,24 @@
+﻿@using OnlineShop.Ui.Models
+
+<div class="row" id="@Article.Id">
+    <div class="col-2 d-flex justify-content-start align-items-center p-1">
+      <span>@Article.Name</span>
+    </div>
+    <div class="col-3 d-flex justify-content-start align-items-center p-1">
+      <span>@Article.Description</span>
+    </div>
+	<div class="col-2 d-flex justify-content-center align-items-center p-1">
+      <span>@Article.Price.ToString("0.00") EUR</span>
+    </div>
+
+    <div class="col-2 d-flex justify-content-center align-items-center p-1">    
+        <input class="input form-control mx-1" type="number" name="quantity" @bind="Quantity"/>
+    </div>
+</div>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public Article Article { get; set; } = new();
+    public int Quantity { get; set; } = 0;
+}
