@@ -1,4 +1,4 @@
-﻿using OnlineShop.Ui.Models;
+﻿using OnlineShop.Ui.Models.Articles;
 
 namespace OnlineShop.Ui.Abstractions.Interfaces
 {

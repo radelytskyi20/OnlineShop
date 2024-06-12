@@ -34,6 +34,7 @@ builder.Services.AddHttpClient<PriceListsClient>();
 builder.Services.AddHttpClient<OrderedArticlesClient>();
 builder.Services.AddHttpClient<OrdersClient>();
 builder.Services.AddHttpClient<OrderStatusTracksClient>();
+builder.Services.AddHttpClient<LoginClient>();
 
 builder.Services.AddTransient<IClientAuthorization, HttpClientAuthorization>();
 builder.Services.AddTransient<IUsersClient, UsersClient>();
@@ -44,6 +45,7 @@ builder.Services.AddTransient<IRepoClient<PriceList>, PriceListsClient>();
 builder.Services.AddTransient<IRepoClient<Order>, OrdersClient>();
 builder.Services.AddTransient<IRepoClient<OrderStatusTrack>, OrderStatusTracksClient>();
 builder.Services.AddTransient<IIdentityServerClient, IdentityServerClient>();
+builder.Services.AddTransient<ILoginClient, LoginClient>();
 
 builder.Services.Configure<IdentityServerApiOptions>(builder.Configuration.GetSection(IdentityServerApiOptions.SectionName));
 builder.Services.Configure<ServiceAdressOptions>(builder.Configuration.GetSection(ServiceAdressOptions.SectionName));

@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.Ui.Models
+﻿namespace OnlineShop.Ui.Models.Articles
 {
     public class PriceList
     {

@@ -25,7 +25,7 @@ namespace OnlineShop.ApiService.Controllers
                 Password = request.Password,
             };
 
-            var token = _loginClient.GetApiTokenByUsernameAndPassword(options);
+            var token = await _loginClient.GetApiTokenByUsernameAndPassword(options);
             return Ok(token);
         }
     }
