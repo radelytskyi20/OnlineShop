@@ -22,5 +22,14 @@ namespace OnlineShop.Ui.Abstractions
 
             return articles;
         }
+
+        public async Task<Article> GetArticle(Guid articleId)
+        {
+            var article = await _client.GetFromJsonAsync<Article>($"articles?id={articleId}") ?? new();
+            var priceLists = await _client.GetFromJsonAsync<List<PriceList>>("pricelists/all") ?? new();
+
+            article.Price = priceLists.FirstOrDefault(price => price.ArticleId == article.Id)?.Price ?? 0M;
+            return article;
+        }
     }
 }

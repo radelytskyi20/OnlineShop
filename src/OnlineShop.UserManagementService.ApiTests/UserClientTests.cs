@@ -190,7 +190,7 @@ namespace OnlineShop.UserManagementService.ApiTests
             await RemoveUserAndAssert(userBeforeRemove);
 
             getResponse = await _systemUnderTests.Get(userBeforeRemove.UserName);
-            Assert.That(getResponse.Code, Is.EqualTo(HttpStatusCode.NoContent.ToString()));
+            Assert.That(getResponse.Code, Is.EqualTo(HttpStatusCode.NotFound.ToString()));
 
             var userAfterRemove = getResponse.Payload;
             Assert.That(userAfterRemove, Is.Null);

@@ -1,6 +1,7 @@
 using OnlineShop.Ui;
 using OnlineShop.Ui.Abstractions;
 using OnlineShop.Ui.Abstractions.Interfaces;
+using OnlineShop.Ui.States;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new("https://
 builder.Services.AddSingleton<ILoginStatusManager, LoginStatusManager>();
 
 builder.Services.AddTransient<IArticlesProvider, ArticlesProvider>();
+
+builder.Services.AddScoped<CartState>();
 
 var app = builder.Build();
 

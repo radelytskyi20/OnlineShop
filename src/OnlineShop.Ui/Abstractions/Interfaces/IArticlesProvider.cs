@@ -5,5 +5,6 @@ namespace OnlineShop.Ui.Abstractions.Interfaces
     public interface IArticlesProvider
     {
         Task<IEnumerable<Article>> GetArticles();
+        Task<Article> GetArticle(Guid articleId);
     }
 }

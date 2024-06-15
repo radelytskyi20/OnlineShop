@@ -1,5 +1,9 @@
 ﻿@using OnlineShop.Ui.Models.Articles;
-    
+@inject ILoginStatusManager LoginStatusManager
+@inject NavigationManager NavigationManager
+@inject States.CartState CartState
+@rendermode RenderMode.InteractiveServer
+
 <div class="row" id="@Article.Id">
     <div class="col-2 d-flex justify-content-start align-items-center p-1">
       <span>@Article.Name</span>
@@ -14,6 +18,14 @@
     <div class="col-2 d-flex justify-content-center align-items-center p-1">    
         <input class="input form-control mx-1" type="number" name="quantity" @bind="Quantity"/>
     </div>
+
+    <div class="col-3 d-flex justify-content-center align-items-center p-1">
+        <button type="button" class="btn btn-primary details" @onclick="Navigate">Details</button> &nbsp; &nbsp;
+        @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
+        {
+            <button class="btn btn-primary buy" type="button" @onclick="_ => CartState.AddArticleToCartAsync(Article.Id, Quantity)">Buy</button>
+        }
+    </div>
 </div>
 
 @code {
@@ -21,4 +33,14 @@
     [Parameter]
     public Article Article { get; set; } = new();
     public int Quantity { get; set; } = 0;
+
+    protected override void OnInitialized()
+    {
+        LoginStatusManager.LoginStatusHasChanged += async (o, e) => await InvokeAsync(StateHasChanged);
+    }
+
+    public void Navigate()
+    {
+        NavigationManager.NavigateTo($"/articles/{Article.Id}");
+    }
 }

@@ -42,7 +42,7 @@ else
     private async Task SubmitAsync()
     {
         var loginStatusChanged = await LoginStatusManager.LogIn(LoginForm.UserName, LoginForm.Password);
-        
+
         if(loginStatusChanged)
         {
             StateHasChanged();
@@ -52,6 +52,7 @@ else
     private async Task LogOut()
     {       
         var loginStatusChanged = await LoginStatusManager.LogOut();
+        LoginForm = new();
 
         if(loginStatusChanged)
         {
