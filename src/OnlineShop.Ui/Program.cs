@@ -10,10 +10,10 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
 builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new("https://localhost:5009") }); //all requests to backend will send to api service
 builder.Services.AddSingleton<ILoginStatusManager, LoginStatusManager>();
-
+builder.Services.AddSingleton<CartState>();
 builder.Services.AddTransient<IArticlesProvider, ArticlesProvider>();
 
-builder.Services.AddScoped<CartState>();
+builder.Services.AddScoped<IOrdersManager, OrdersManager>();
 
 var app = builder.Build();
 

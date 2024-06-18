@@ -9,8 +9,7 @@ namespace OnlineShop.Ui.Abstractions
         private LoginStatus _loginStatus = new();
 
         public LoginStatus LoginStatus => _loginStatus;
-        public event EventHandler? LoginStatusHasChanged;
-
+        
         public LoginStatusManager(HttpClient client) { _client = client; }
 
         public async Task<bool> LogIn(string username, string password)
@@ -50,5 +49,7 @@ namespace OnlineShop.Ui.Abstractions
             LoginStatusHasChanged?.Invoke(this, EventArgs.Empty);
             return await Task.FromResult(true);
         }
+
+        public event EventHandler? LoginStatusHasChanged;
     }
 }

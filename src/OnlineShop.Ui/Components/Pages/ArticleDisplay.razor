@@ -2,6 +2,7 @@
 @inject ILoginStatusManager LoginStatusManager
 @inject NavigationManager NavigationManager
 @inject States.CartState CartState
+@inject IJSRuntime jSRuntime
 @rendermode RenderMode.InteractiveServer
 
 <div class="row" id="@Article.Id">
@@ -23,7 +24,7 @@
         <button type="button" class="btn btn-primary details" @onclick="Navigate">Details</button> &nbsp; &nbsp;
         @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
         {
-            <button class="btn btn-primary buy" type="button" @onclick="_ => CartState.AddArticleToCartAsync(Article.Id, Quantity)">Buy</button>
+            <button class="btn btn-primary buy" type="button" @onclick="async _ => await AddArticleToCart()">Buy</button>
         }
     </div>
 </div>
@@ -42,5 +43,17 @@
     public void Navigate()
     {
         NavigationManager.NavigateTo($"/articles/{Article.Id}");
+    }
+
+    private async Task AddArticleToCart()
+    {
+        var addToCartResult = await CartState.AddArticleToCartAsync(Article.Id, Quantity);
+        if (addToCartResult)
+        {
+            await jSRuntime.InvokeVoidAsync("alert", $"{Article.Name} {AlertMessages.AddToCartSuccess}");
+            return;
+        }
+
+        await jSRuntime.InvokeVoidAsync("alert", AlertMessages.AddToCartError);
     }
 }

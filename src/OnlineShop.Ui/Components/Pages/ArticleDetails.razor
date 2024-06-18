@@ -3,7 +3,7 @@
 @inject ILoginStatusManager LoginStatusManager
 @inject States.CartState CartState
 @inject IArticlesProvider ArticlesProvider
-@inject IJSRuntime jsRuntime
+@inject IJSRuntime jSRuntime
 @inject ILogger<ArticleDetails> Logger
 @rendermode RenderMode.InteractiveServer
 
@@ -56,7 +56,7 @@
         <div class="col-3 d-flex justify-content-center align-items-center p-1">
             @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
             {
-                <button class="btn btn-primary" type="button" @onclick="_=> CartState.AddArticleToCartAsync(Article.Id, Quantity)">Buy</button>
+                <button class="btn btn-primary" type="button" @onclick="async _=> await AddArticleToCart()">Buy</button>
             }
         </div>
     </div>
@@ -79,5 +79,17 @@
             Article = await ArticlesProvider.GetArticle(ArticleId);
         }
         catch (Exception ex) { Logger.LogError(ex.Message); }
+    }
+
+    private async Task AddArticleToCart()
+    {
+        var addToCartResult = await CartState.AddArticleToCartAsync(Article.Id, Quantity);
+        if (addToCartResult)
+        {
+            await jSRuntime.InvokeVoidAsync("alert", $"{Article.Name} {AlertMessages.AddToCartSuccess}");
+            return;
+        }
+
+        await jSRuntime.InvokeVoidAsync("alert", AlertMessages.AddToCartError);
     }
 }

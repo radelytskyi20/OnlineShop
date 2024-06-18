@@ -1,0 +1,63 @@
+﻿@inject ILoginStatusManager LoginStatusManager
+@inject IOrdersManager OrdersManager
+@inject CartState CartState
+@rendermode RenderMode.InteractiveServer
+
+<EditForm class="vstack gap-3" Model="Address" FormName="AddressForm">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div>
+        <label class="form-label" for="country">Country:</label>
+        <InputText id="country" disabled="true" class="form-control" @bind-Value="Address.Country"></InputText>
+        <ValidationMessage class="form-label mx-1" For="() => Address.Country"></ValidationMessage>
+    </div>
+
+    <div>
+        <label class="form-label" for="city">City:</label>
+        <InputText id="city" disabled="true" class="form-control" @bind-Value="Address.City"></InputText>
+        <ValidationMessage class="form-label mx-1" For="() => Address.City"></ValidationMessage>
+    </div>
+
+    <div>
+        <label class="form-label" for="postal-code">Postal code:</label>
+        <InputText id="postal-code" disabled="true" class="form-control" @bind-Value="Address.PostalCode"></InputText>
+        <ValidationMessage class="form-label mx-1" For="() => Address.PostalCode"></ValidationMessage>
+    </div>
+
+    <div>
+        <label class="form-label" for="address-line-1">Address line 1:</label>
+        <InputText id="address-line-1" disabled="true" class="form-control" @bind-Value="Address.AddressLine1"></InputText>
+        <ValidationMessage class="form-label mx-1" For="() => Address.AddressLine1"></ValidationMessage>
+    </div>
+
+    <div>
+        <label class="form-label" for="address-line-2">Address line 2:</label>
+        <InputText id="address-line-2" disabled="true" class="form-control" @bind-Value="Address.AddressLine2"></InputText>
+        <ValidationMessage class="form-label mx-1" For="() => Address.AddressLine2"></ValidationMessage>
+    </div>
+
+    @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
+    {
+        <div>
+            <button type="submit" class="btn btn-primary mx-1" @onclick="async _ => await SubmitAsync()">Submit</button>
+        </div>
+    }
+
+</EditForm>
+
+@code {
+  
+    [EditorRequired]
+    [Parameter]
+    public Address Address { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        LoginStatusManager.LoginStatusHasChanged += async (o, e) => await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task SubmitAsync()
+    {
+        await OrdersManager.SubmitOrder(Address.Id, CartState.Items);
+    }
+}
