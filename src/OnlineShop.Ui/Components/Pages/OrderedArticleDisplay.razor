@@ -1,0 +1,12 @@
+﻿<p>
+    <span>@Article.Name</span>
+    <span>Quantity: @Article.Quantity</span>
+    <span>Total: @Article.Total.ToString("0.00")</span>
+</p>
+
+@code {
+    
+    [EditorRequired]
+    [Parameter]
+    public OrderedArticle Article { get; set; } = new();
+}
