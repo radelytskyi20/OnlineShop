@@ -237,6 +237,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{BC7D780E-45BE-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Ui", "src\OnlineShop.Ui\OnlineShop.Ui.csproj", "{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Ui.SeleniumTests", "src\OnlineShop.Ui.SeleniumTests\OnlineShop.Ui.SeleniumTests.csproj", "{DA40DCE0-C195-475D-8573-D656C7BA6F1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +293,10 @@ Global
 		{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA40DCE0-C195-475D-8573-D656C7BA6F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA40DCE0-C195-475D-8573-D656C7BA6F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA40DCE0-C195-475D-8573-D656C7BA6F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA40DCE0-C195-475D-8573-D656C7BA6F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -330,6 +336,7 @@ Global
 		{8CF78993-199A-49C1-9B7B-BA0C6A47E348} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
 		{DB934930-715C-489D-B61D-96671EC9C2B1} = {23374A74-B464-4D25-A0A3-586D8AD51381}
 		{F36F55D1-FFDD-4C7F-A39D-6709762E85F0} = {BC7D780E-45BE-4DA6-BB03-B7C26F881D47}
+		{DA40DCE0-C195-475D-8573-D656C7BA6F1A} = {085E03CF-D58C-461E-A041-A33DAFB4D5B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23FC04DB-250C-4F7E-9994-591BCF0FD54D}
