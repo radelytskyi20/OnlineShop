@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 
 namespace OnlineShop.Ui.SeleniumTests
 {
+    [TestFixture]
     public class InitialTest
     {
         [Test]
