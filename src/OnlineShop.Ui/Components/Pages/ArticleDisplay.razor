@@ -21,10 +21,10 @@
     </div>
 
     <div class="col-3 d-flex justify-content-center align-items-center p-1">
-        <button type="button" class="btn btn-primary details" @onclick="Navigate">Details</button> &nbsp; &nbsp;
+        <button type="button" class="btn btn-primary details" name="btn-details" @onclick="Navigate">Details</button> &nbsp; &nbsp;
         @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
         {
-            <button class="btn btn-primary buy" type="button" @onclick="async _ => await AddArticleToCart()">Buy</button>
+            <button class="btn btn-primary buy" type="button" name="btn-buy" @onclick="async _ => await AddArticleToCart()">Buy</button>
         }
     </div>
 </div>

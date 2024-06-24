@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
 
 namespace OnlineShop.Ui.SeleniumTests
 {
@@ -14,10 +13,10 @@ namespace OnlineShop.Ui.SeleniumTests
             string username = "yaroslav";
             string password = "Pass_123";
 
-            IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver = new EdgeDriver();
             driver.Navigate().GoToUrl("https://localhost:5011");
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(5000);
+            Thread.Sleep(1000);
 
             var usernameTextBox = driver.FindElement(By.Id("login-form-username"));
             usernameTextBox.SendKeys(username);
@@ -28,7 +27,7 @@ namespace OnlineShop.Ui.SeleniumTests
             var submitButton = driver.FindElement(By.Id("login-form-submit-button"));
             submitButton.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(5000);
+            Thread.Sleep(1000);
 
             var welcomeMessage = driver.FindElement(By.Id("login-form-welcome-message"));
             Assert.That(expectedHelloMessage, Is.EqualTo(welcomeMessage.Text));
@@ -45,10 +44,10 @@ namespace OnlineShop.Ui.SeleniumTests
             var username = "yaroslav";
             var password = "Pass_123";
 
-            IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver = new EdgeDriver();
             driver.Navigate().GoToUrl("https://localhost:5011");
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(5000);
+            Thread.Sleep(1000);
 
             var usernameTextBox = driver.FindElement(By.Id("login-form-username"));
             usernameTextBox.SendKeys(username);
@@ -59,12 +58,12 @@ namespace OnlineShop.Ui.SeleniumTests
             var submitButton = driver.FindElement(By.Id("login-form-submit-button"));
             submitButton.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(5000);
+            Thread.Sleep(1000);
 
             var logoutButton = driver.FindElement(By.Id("login-form-logout-button"));
             logoutButton.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(5000);
+            Thread.Sleep(1000);
 
             usernameTextBox = driver.FindElement(By.Id("login-form-username"));
             Assert.That(usernameTextBox.Displayed, Is.True);
