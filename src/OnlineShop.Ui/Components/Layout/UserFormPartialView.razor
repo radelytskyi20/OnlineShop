@@ -14,12 +14,12 @@
         <InputText type="text" class="form-control" id="input-last-name" @bind-Value="User.LastName"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.LastName"></ValidationMessage>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-1">
         <label for="input-email" class="form-label">Email address</label>
         <InputText type="email" class="form-control" id="input-email" @bind-Value="User.Email"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.Email"></ValidationMessage>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-1">
         <label for="input-phone" class="form-label">Phone</label>
         <InputText type="tel" class="form-control" id="input-phone" @bind-Value="User.Phone"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.Phone"></ValidationMessage>
@@ -41,12 +41,12 @@
         <InputText type="text" class="form-control" id="input-postal-code-delivery" @bind-Value="User.DeliveryAddress.PostalCode"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.DeliveryAddress.PostalCode"></ValidationMessage>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-1">
         <label for="input-address-line-first-delivery" class="form-label">Address Line 1</label>
         <InputText type="text" class="form-control" id="input-address-line-first-delivery" @bind-Value="User.DeliveryAddress.AddressLine1"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.DeliveryAddress.AddressLine1"></ValidationMessage>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-1">
         <label for="input-address-line-second-delivery" class="form-label">Address Line 2</label>
         <InputText type="text" class="form-control" id="input-address-line-second-delivery" @bind-Value="User.DeliveryAddress.AddressLine2"></InputText>
     </div>
@@ -67,12 +67,12 @@
         <InputText type="text" class="form-control" id="InputPostalCodeDefault" @bind-Value="User.DefaultAddress.PostalCode"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.DefaultAddress.PostalCode"></ValidationMessage>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-1">
         <label for="InputAddressLineFirstDefault" class="form-label">Address Line 1</label>
         <InputText type="text" class="form-control" id="InputAddressLineFirstDefault" @bind-Value="User.DefaultAddress.AddressLine1"></InputText>
         <ValidationMessage class="form-text text-danger mx-1" For="() => User.DefaultAddress.AddressLine1"></ValidationMessage>
     </div>
-    <div class="col-12">
+    <div class="col-12 pt-1">
         <label for="InputAddressLineSecondDefault" class="form-label">Address Line 2</label>
         <InputText type="text" class="form-control" id="InputAddressLineSecondDefault" @bind-Value="User.DefaultAddress.AddressLine2"></InputText>
     </div>

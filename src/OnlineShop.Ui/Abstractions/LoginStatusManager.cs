@@ -1,4 +1,5 @@
 ﻿using OnlineShop.Ui.Abstractions.Interfaces;
+using OnlineShop.Ui.Models.Common;
 using OnlineShop.Ui.Models.Security;
 
 namespace OnlineShop.Ui.Abstractions

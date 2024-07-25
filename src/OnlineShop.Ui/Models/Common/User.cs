@@ -1,7 +1,6 @@
-﻿using OnlineShop.Ui.Models.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShop.Ui.Models.Security
+namespace OnlineShop.Ui.Models.Common
 {
     public class User
     {

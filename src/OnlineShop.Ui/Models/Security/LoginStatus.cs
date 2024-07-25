@@ -1,4 +1,6 @@
-﻿namespace OnlineShop.Ui.Models.Security
+﻿using OnlineShop.Ui.Models.Common;
+
+namespace OnlineShop.Ui.Models.Security
 {
     public class LoginStatus
     {

@@ -1,5 +1,4 @@
 ﻿using OnlineShop.Ui.Models.Common;
-using OnlineShop.Ui.Models.Security;
 
 namespace OnlineShop.Ui.Models.Orders
 {

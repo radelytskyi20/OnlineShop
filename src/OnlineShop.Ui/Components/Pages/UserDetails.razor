@@ -1,0 +1,32 @@
+﻿@page "/user";
+@inject ILoginStatusManager LoginStatusManager
+@inject NavigationManager NavigationManager
+@rendermode RenderMode.InteractiveServer
+
+@if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
+{
+    <h1 class="text-center text-uppercase">Your Account, @User.FirstName @User.LastName</h1>
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <UserFormPartialView User="User"></UserFormPartialView>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+}
+else
+{
+    NavigationManager.NavigateTo("/");
+}
+
+@code {
+    public User User { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        User = LoginStatusManager.LoginStatus.User;
+        LoginStatusManager.LoginStatusHasChanged += async (o, e) => await InvokeAsync(StateHasChanged);
+    }
+}
