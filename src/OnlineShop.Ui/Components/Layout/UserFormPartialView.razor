@@ -1,0 +1,90 @@
+﻿@rendermode RenderMode.InteractiveServer
+
+<EditForm class="row align-items-center" Model="User" FormName="UserForm">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="col-12 fs-3 text pt-2 fw-bold">Personal information</div>
+    <div class="col-6 pt-1">
+        <label for="input-first-name" class="form-label">First name</label>
+        <InputText type="text" class="form-control" id="input-first-name" @bind-Value="User.FirstName"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.FirstName"></ValidationMessage>
+    </div>
+    <div class="col-6 pt-1">
+        <label for="input-last-name" class="form-label">Last name</label>
+        <InputText type="text" class="form-control" id="input-last-name" @bind-Value="User.LastName"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.LastName"></ValidationMessage>
+    </div>
+    <div class="col-12">
+        <label for="input-email" class="form-label">Email address</label>
+        <InputText type="email" class="form-control" id="input-email" @bind-Value="User.Email"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.Email"></ValidationMessage>
+    </div>
+    <div class="col-12">
+        <label for="input-phone" class="form-label">Phone</label>
+        <InputText type="tel" class="form-control" id="input-phone" @bind-Value="User.Phone"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.Phone"></ValidationMessage>
+    </div>
+
+    <div class="col-12 fs-3 text pt-2 fw-bold">Delivery Address</div>
+    <div class="col-4 pt-1">
+        <label for="input-country-delivery" class="form-label">Country</label>
+        <InputText type="text" class="form-control" id="input-country-delivery" @bind-Value="User.DeliveryAddress.Country"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DeliveryAddress.Country"></ValidationMessage>
+    </div>
+    <div class="col-4 pt-1">
+        <label for="input-city-delivery" class="form-label">City</label>
+        <InputText type="text" class="form-control" id="input-city-delivery" @bind-Value="User.DeliveryAddress.City"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DeliveryAddress.City"></ValidationMessage>
+    </div>
+    <div class="col-4 pt-1">
+        <label for="input-postal-code-delivery" class="form-label">Postal code</label>
+        <InputText type="text" class="form-control" id="input-postal-code-delivery" @bind-Value="User.DeliveryAddress.PostalCode"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DeliveryAddress.PostalCode"></ValidationMessage>
+    </div>
+    <div class="col-12">
+        <label for="input-address-line-first-delivery" class="form-label">Address Line 1</label>
+        <InputText type="text" class="form-control" id="input-address-line-first-delivery" @bind-Value="User.DeliveryAddress.AddressLine1"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DeliveryAddress.AddressLine1"></ValidationMessage>
+    </div>
+    <div class="col-12">
+        <label for="input-address-line-second-delivery" class="form-label">Address Line 2</label>
+        <InputText type="text" class="form-control" id="input-address-line-second-delivery" @bind-Value="User.DeliveryAddress.AddressLine2"></InputText>
+    </div>
+
+    <div class="col-12 fs-3 text pt-2 fw-bold">Default Address</div>
+    <div class="col-4 pt-1">
+        <label for="InputCountryDefault" class="form-label">Country</label>
+        <InputText type="text" class="form-control" id="InputCountryDefault" @bind-Value="User.DefaultAddress.Country"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DefaultAddress.Country"></ValidationMessage>
+    </div>
+    <div class="col-4 pt-1">
+        <label for="InputCityDefault" class="form-label">City</label>
+        <InputText type="text" class="form-control" id="InputCityDefault" @bind-Value="User.DefaultAddress.City"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DefaultAddress.City"></ValidationMessage>
+    </div>
+    <div class="col-4 pt-1">
+        <label for="InputPostalCodeDefault" class="form-label">Postal code</label>
+        <InputText type="text" class="form-control" id="InputPostalCodeDefault" @bind-Value="User.DefaultAddress.PostalCode"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DefaultAddress.PostalCode"></ValidationMessage>
+    </div>
+    <div class="col-12">
+        <label for="InputAddressLineFirstDefault" class="form-label">Address Line 1</label>
+        <InputText type="text" class="form-control" id="InputAddressLineFirstDefault" @bind-Value="User.DefaultAddress.AddressLine1"></InputText>
+        <ValidationMessage class="form-text text-danger mx-1" For="() => User.DefaultAddress.AddressLine1"></ValidationMessage>
+    </div>
+    <div class="col-12">
+        <label for="InputAddressLineSecondDefault" class="form-label">Address Line 2</label>
+        <InputText type="text" class="form-control" id="InputAddressLineSecondDefault" @bind-Value="User.DefaultAddress.AddressLine2"></InputText>
+    </div>
+    <div class="col-12 d-grid pt-3">
+        <button type="submit" class="btn btn-primary" @onclick="async _ => await SubmitAsync()">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public User User { get; set; } = new();
+
+    private async Task SubmitAsync() => await Task.Delay(100);
+}

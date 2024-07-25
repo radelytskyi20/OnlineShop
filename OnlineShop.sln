@@ -237,7 +237,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{BC7D780E-45BE-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Ui", "src\OnlineShop.Ui\OnlineShop.Ui.csproj", "{F36F55D1-FFDD-4C7F-A39D-6709762E85F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShop.Ui.SeleniumTests", "src\OnlineShop.Ui.SeleniumTests\OnlineShop.Ui.SeleniumTests.csproj", "{DA40DCE0-C195-475D-8573-D656C7BA6F1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Ui.SeleniumTests", "src\OnlineShop.Ui.SeleniumTests\OnlineShop.Ui.SeleniumTests.csproj", "{DA40DCE0-C195-475D-8573-D656C7BA6F1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
