@@ -14,6 +14,7 @@ builder.Services.AddSingleton<CartState>();
 
 builder.Services.AddTransient<IArticlesProvider, ArticlesProvider>();
 builder.Services.AddTransient<IOrdersManager, OrdersManager>();
+builder.Services.AddTransient<IUsersManager, UsersManager>();
 
 var app = builder.Build();
 

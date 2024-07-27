@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                <UserFormPartialView User="User"></UserFormPartialView>
+                <UserFormPartialView User="User" onSubmitCallback="UserStateHasChanged"></UserFormPartialView>
             </div>
             <div class="col-2"></div>
         </div>
@@ -25,10 +25,12 @@ else
 
 @code {
     public User User { get; set; } = new();
+    public EventHandler UserStateHasChanged = null!;
 
     protected override void OnInitialized()
     {
         User = LoginStatusManager.LoginStatus.User;
         LoginStatusManager.LoginStatusHasChanged += async (o, e) => await InvokeAsync(StateHasChanged);
+        UserStateHasChanged = async (o, e) => await InvokeAsync(StateHasChanged);
     }
 }
