@@ -3,6 +3,8 @@
 @inject NavigationManager NavigationManager
 @rendermode RenderMode.InteractiveServer
 
+<PageTitle>Account</PageTitle>
+
 @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
 {
     <h1 class="text-center text-uppercase">Your Account, @User.FirstName @User.LastName</h1>

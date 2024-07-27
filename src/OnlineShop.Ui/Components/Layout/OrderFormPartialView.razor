@@ -1,5 +1,4 @@
-﻿@inject ILoginStatusManager LoginStatusManager
-@inject IOrdersManager OrdersManager
+﻿@inject IOrdersManager OrdersManager
 @inject CartState CartState
 @rendermode RenderMode.InteractiveServer
 
@@ -36,12 +35,9 @@
         <ValidationMessage class="form-label mx-1" For="() => Address.AddressLine2"></ValidationMessage>
     </div>
 
-    @if (LoginStatusManager.LoginStatus.Token?.IsLoggedIn ?? false)
-    {
-        <div>
-            <button type="submit" class="btn btn-primary mx-1" @onclick="async _ => await SubmitAsync()">Submit</button>
-        </div>
-    }
+    <div>
+        <button type="submit" class="btn btn-primary mx-1" @onclick="async _ => await SubmitAsync()">Submit</button>
+    </div>
 
 </EditForm>
 
@@ -50,11 +46,6 @@
     [EditorRequired]
     [Parameter]
     public Address Address { get; set; } = new();
-
-    protected override void OnInitialized()
-    {
-        LoginStatusManager.LoginStatusHasChanged += async (o, e) => await InvokeAsync(StateHasChanged);
-    }
 
     private async Task SubmitAsync()
     {
